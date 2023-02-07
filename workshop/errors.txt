@@ -1,0 +1,162 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/script.rpy", line 69: expected statement.
+    jour += 1
+         ^
+
+File "game/script.rpy", line 115: expected statement.
+    nbRejets_hippie += 1
+                    ^
+
+File "game/script.rpy", line 122: expected statement.
+    nbRejets_hippie += 1
+                    ^
+
+File "game/script.rpy", line 196: expected statement.
+    jour += 1
+         ^
+
+File "game/script.rpy", line 216: expected statement.
+    nbRejets_hippie += 1
+                    ^
+
+File "game/script.rpy", line 223: expected statement.
+    nbRejets_hippie += 1
+                    ^
+
+File "game/script.rpy", line 232: expected statement.
+    jour += 1
+         ^
+
+File "game/script.rpy", line 245: expected statement.
+    amitie_got += 1
+               ^
+
+File "game/script.rpy", line 246: expected statement.
+    nbRejets_hippie += 1
+                    ^
+
+File "game/script.rpy", line 252: expected statement.
+    amitie_hippie += 1
+                  ^
+
+File "game/script.rpy", line 269: expected statement.
+    nbRejets_hippie += 1
+                    ^
+
+File "game/script.rpy", line 270: expected statement.
+    amitie_punk += 1
+                ^
+
+File "game/script.rpy", line 282: expected statement.
+    jour += 1
+         ^
+
+File "game/script.rpy", line 294: expected statement.
+    amitie_got += 1
+               ^
+
+File "game/script.rpy", line 301: expected statement.
+    amitie_hippie += 1
+                  ^
+
+File "game/script.rpy", line 312: expected statement.
+    amitie_punk += 1
+                ^
+
+File "game/script.rpy", line 315: Line is indented, but the preceding say statement statement does not expect a block. Please check this line's indentation.
+    "oui":
+    ^
+
+File "game/script.rpy", line 359: end of line expected.
+    "Moi" "Je suis " nom ". J'ai été embauché en tant qu'ingé son dans ce studio. Et pour répondre à votre question, la porte était ouverte."
+                     ^
+
+File "game/script.rpy", line 380: expected statement.
+    amitie_got += 1
+               ^
+
+File "game/script.rpy", line 388: expected statement.
+    amitie_hippie += 1
+                  ^
+
+File "game/script.rpy", line 448: expected statement.
+    amitie_punk += 1
+                ^
+
+File "game/script.rpy", line 456: expected statement.
+    amitie_got += 1
+               ^
+
+File "game/script.rpy", line 464: end of line expected.
+    "Moi" "Bonjour c'est " nom " l'ingé son d'hier, j'ai décidé de commencer à enregistrer avec votre groupe, il m'avait bien plu."
+                           ^
+
+File "game/script.rpy", line 510: expected statement.
+    amitie_hippie += 1
+                  ^
+
+File "game/script.rpy", line 529: end of line expected.
+    "Moi" "Oui, pourquoi pas !":
+                               ^
+
+File "game/script.rpy", line 539: expected statement.
+    amitie_punk += 1
+                ^
+
+File "game/script.rpy", line 553: expected statement.
+    amitie_punk += 1
+                ^
+
+File "game/script.rpy", line 557: expected statement.
+    amitie_punk -= 1
+                 ^
+
+File "game/script.rpy", line 588: expected statement.
+    amitie_punk += 1
+                ^
+
+File "game/script.rpy", line 596: expected statement.
+    "je vais avec lui ?":
+                        ^
+
+File "game/script.rpy", line 617: expected statement.
+    amitie_got += 1
+               ^
+
+File "game/script.rpy", line 618: expected statement.
+    flirt_got = True
+              ^
+
+File "game/script.rpy", line 648: expected statement.
+    amitie_got += 1
+               ^
+
+File "game/script.rpy", line 674: expected statement.
+    amitie_hippie += 1
+                  ^
+
+File "game/script.rpy", line 675: expected statement.
+    flirt_hippie = True
+                 ^
+
+File "game/script.rpy", line 704: expected statement.
+    reussite_diabolo = true
+                     ^
+
+File "game/script.rpy", line 723: expected statement.
+    amitie_hippie += 1
+                  ^
+
+File "game/script.rpy", line 753: expected statement.
+    flirt_got = True
+              ^
+
+File "game/script.rpy", line 769: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
+    "c'est qui ?"
+                 ^
+
+Ren'Py Version: Ren'Py 8.0.3.22090809
+Tue Feb  7 14:26:41 2023
