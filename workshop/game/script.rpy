@@ -67,7 +67,7 @@ label start:
 
     # --------------------------------------------------------------------------
     # ----- JOURNEE 1 -----
-    jour += 1
+    $jour += 1
 
     # afficher interieur studio
 
@@ -113,14 +113,14 @@ label start:
 
     menu:
         "Visiter un parc":
-            nbRejets_hippie += 1
+            $nbRejets_hippie += 1
             jump choix2_got
 
         "Partir faire des courses":
             jump choix2_hippie
 
         "Allez boire un verre au bar":
-            nbRejets_hippie += 1
+            $nbRejets_hippie += 1
             jump choix2_punk
 
 
@@ -214,14 +214,14 @@ label start:
     # Decision session studio de la journée
     menu:
         "Je vais appeler le groupe Effervecence.":
-            nbRejets_hippie += 1
+            $nbRejets_hippie += 1
             jump choix3_got
 
         "Le groupe Quatuor m'avait bien plus hier.":
             jump choix3_hippie
 
         "J'ai envie de voir ce que peut donner le groupe de Perruquiers Noirs aujourd'hui.":
-            nbRejets_hippie += 1
+            $nbRejets_hippie += 1
             jump choix3_punk
 
 
@@ -243,14 +243,14 @@ label start:
     # Decision session studio de la journée
     menu:
         "Marie-Anne":
-            amitie_got += 1
-            nbRejets_hippie += 1
+            $amitie_got += 1
+            $nbRejets_hippie += 1
             jump choix4_got
 
 
 
         "Jeanne":
-            amitie_hippie += 1
+            $amitie_hippie += 1
             "session enregistrement"
             if (flirt_hippie):
                 "est-ce que jai envie de continuer a flirt avec elle ?"
@@ -267,8 +267,8 @@ label start:
                 jump choix3_hippie
 
         "Patrick":
-            nbRejets_hippie += 1
-            amitie_punk += 1
+            $nbRejets_hippie += 1
+            $amitie_punk += 1
             "session enregitrement"
             if (amitie_punk >= 4):
                 jump choix4_punk
@@ -292,14 +292,14 @@ label start:
     # Decision studio
     menu:
         "Marie-Anne":
-            amitie_got += 1
+            $amitie_got += 1
             if (flirt_got):
                 jump date3_got
             else:
                 jump choix4_got
 
         "Jeanne":
-            amitie_hippie += 1
+            $amitie_hippie += 1
             "session enregistrement"
             hippie "tu veux venir chez moi ?"
             menu:
@@ -310,7 +310,7 @@ label start:
                     jump neutralEnding_2
 
         "Patrick":
-            amitie_punk += 1
+            $amitie_punk += 1
             punk "je ne repond pas"
             "est-ce que je vais le chercher ?"
             menu:
@@ -379,7 +379,7 @@ label start:
     # --------------------------------------------------------------------------
     # Choix 2 : Premiere balade du soir
     label choix2_got:
-        amitie_got += 1
+        $amitie_got += 1
 
 
 
@@ -387,7 +387,7 @@ label start:
         jump choix2_done
 
     label choix2_hippie:
-        amitie_hippie += 1
+        $amitie_hippie += 1
 
         "Après avoir un petit peu tourné dans les rues autour de chez moi, j’ai trouvé une supérette, mais il semble y avoir un attroupement devant."
         "Mais… C’est pas la fille de tout à l’heure avec une pancarte au milieu de la foule ?"
@@ -447,7 +447,7 @@ label start:
         jump choix2_done
 
     label choix2_punk:
-        amitie_punk += 1
+        $amitie_punk += 1
 
         "J’irais bien faire un tour au bar ce soir, ça pourrait m’aider à rencontrer du monde et à me familiariser avec la ville."
         "*J'entre dans un bar et m‘approche du comptoir pour commander une bière"
@@ -548,7 +548,7 @@ label start:
 
         "Le groupe \"Quatuor\" passe la journée au studio et s’améliore beaucoup !"
 
-        amitie_hippie += 1
+        $amitie_hippie += 1
         "Vous devenez plus ami avec Jeanne !"
 
         "Moi" "La séance est terminée, merci beaucoup."
@@ -579,7 +579,7 @@ label start:
 
 
     label choix3_punk:
-        amitie_punk += 1
+        $amitie_punk += 1
 
         "J'appelle un des membres du groupe et leur demande de venir."
         "blablabla"
@@ -773,13 +773,18 @@ label start:
         menu:
             "Je vais le suivre, j’ai peur qu'il lui arrive quelque chose de grave.":
                 "Je crois qu'ils n'ont pas compris la dernière fois en effet."
-                amitie_punk += 1
+                $amitie_punk += 1
                 "--- Votre amitié avec Patrick augmente ---"
                 punk "Parfait ! Viens avec moi on va chercher des baramines et on va leur montrer à ces sales fachos!"
+                "Moi" "Je te suis."
 
+                "Je suis donc Patrick. Nous arrivons rapidement dans une rue ou on peut voir les baramines."
+                punk "C’est parti, on va les démolir."
 
-                # reprendre ici
-                "estce ue j'essaie de le convaincre de s'ouvrir ?"
+                "Est-ce que j'essaie de le convaincre de se calmer et de ne pas y aller ?"
+                # MINI JEU CONVAINCRE LE PUNK DE NE PAS Y ALLER
+
+                
                 menu:
                     "oui":
                         punk "je m'ouvre et renonce a la rix"
@@ -808,8 +813,8 @@ label start:
     # Date 1 :
     label date1_got:
 
-        amitie_got += 1
-        flirt_got = True
+        $amitie_got += 1
+        $flirt_got = True
 
         "Après un bon moment à les suivre, nous arrivons devant une grande grille."
         "\"Cimetière de ...\""
@@ -839,7 +844,7 @@ label start:
         got "Les flics ! Cours !"
 
         # ----- Mini jeu course poursuite -----
-        amitie_got += 1
+        $amitie_got += 1
 
         scene bg cimetiere3
         "J'ai perdu les membres du groupe et j'ai l'impression que je suis le seul à être poursuivi."
@@ -865,8 +870,8 @@ label start:
 
 
     label date1_hippie:
-        amitie_hippie += 1
-        flirt_hippie = True
+        $amitie_hippie += 1
+        $flirt_hippie = True
 
         hippie "Oh super ! Tu vas voir, je suis une super prof !"
 
@@ -895,7 +900,7 @@ label start:
 
                 # MINI JEU DIABOLO :
                 #(rester appuyé sur le clic pour le lancer le plus haut possible, puis décaler de droite à gauche pour bien le rattraper)
-                reussite_diabolo = true
+                $reussite_diabolo = True
 
                 if reussite_diabolo:
                     hippie "Ouah, t’as pris le coup super vite, c’était incroyable !"
@@ -914,7 +919,7 @@ label start:
                         "est-ce que je flirte avec elle ?"
                         menu:
                             "oui allez":
-                                amitie_hippie += 1
+                                $amitie_hippie += 1
                                 hippie "oh que tu es beau"
                             "non c'est non":
                                 "fin de journee"
@@ -944,7 +949,7 @@ label start:
         got "c'est diner chandelle ajd"
         "minijeu nourriture"
         #coder si c'est reussi ou non, et donc si il y a un flirt ou non
-        flirt_got = True
+        $flirt_got = True
 
         jump date2_done
 
