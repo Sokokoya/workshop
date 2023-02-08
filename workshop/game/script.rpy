@@ -5,18 +5,18 @@
 
 # ----- Scenes -----
 
-image bg cimetiere1 = bg_cimetiere_jour.jpg
-image bg cimetiere2 = bg_cimetiere2_jour.jpg
-image bg cimetiere3 = bg_cimetiere3_jour.jpg
-image bg cimetiere4 = bg_cimetiere4_jour.jpg
-image bg cimetiere5 = bg_cimetiere5_jour.jpg
-image bg crypte = bg_crypte_jour.jpg
+#image bg cimetiere1 = bg_cimetiere_jour.jpg
+#image bg cimetiere2 = bg_cimetiere2_jour.jpg
+#image bg cimetiere3 = bg_cimetiere3_jour.jpg
+#image bg cimetiere4 = bg_cimetiere4_jour.jpg
+#image bg cimetiere5 = bg_cimetiere5_jour.jpg
+#image bg crypte = bg_crypte_jour.jpg
 
-image bg plaine1 = bg_plaine_jour.jpg
-image bg plaine2 = bg_plaine2_jour.jpg
-image bg plaine3 = bg_plaine3_jour.jpg
-image bg plaine4 = bg_plaine4_jour.jpg
-image bg plaine5 = bg_plaine5_jour.jpg
+#image bg plaine1 = bg_plaine_jour.jpg
+#image bg plaine2 = bg_plaine2_jour.jpg
+#image bg plaine3 = bg_plaine3_jour.jpg
+#image bg plaine4 = bg_plaine4_jour.jpg
+#image bg plaine5 = bg_plaine5_jour.jpg
 
 # ----- Personnages -----
 
@@ -48,21 +48,21 @@ define voisine = Character('Vieille Voisine', color="555555")
 label start:
     python:
         nom = renpy.input("Quel est ton nom ?")
-        nom = name.strip() or "Personne"
+        nom = nom.strip() or "Personne"
 
-        # Declaration des amities
-        amitie_got = 0
-        amitie_hippie = 0
-        amitie_punk = 0
+    # Declaration des amities
+    $amitie_got = 0
+    $amitie_hippie = 0
+    $amitie_punk = 0
 
-        # Declaration des flirts
-        flirt_got = False
-        flirt_hippie = False
-        flirt_punk = False
+    # Declaration des flirts
+    $flirt_got = False
+    $flirt_hippie = False
+    $flirt_punk = False
 
-        nbRejets_hippie = 0
-        jour = 0
-        nbBieres = 0
+    $nbRejets_hippie = 0
+    $jour = 0
+    $nbBieres = 0
 
 
     # --------------------------------------------------------------------------
@@ -70,6 +70,7 @@ label start:
     $jour += 1
 
     # afficher interieur studio
+    "Tu t'appelles [nom]"
 
     "(Téléphone sonne)"
     "(Décroche le téléphone)"
@@ -106,95 +107,103 @@ label start:
             jump choix1_non
 
 
+    label suite1:
+        "Eh bien, j’aurais aimé avoir une première journée moins agitée..."
+        "Ces filles étaient intéressantes cependant, chacune à leur manière."
+        "Vu que je ne suis pas encore fatigué, autant visiter un peu la ville, pour me familiariser avec."
 
-    "Eh bien, j’aurais aimé avoir une première journée moins agitée..."
-    "Ces filles étaient intéressantes cependant, chacune à leur manière."
-    "Vu que je ne suis pas encore fatigué, autant visiter un peu la ville, pour me familiariser avec."
+        menu:
+            "Visiter un parc":
+                $nbRejets_hippie += 1
+                jump choix2_got
 
-    menu:
-        "Visiter un parc":
-            $nbRejets_hippie += 1
-            jump choix2_got
+            "Partir faire des courses":
+                jump choix2_hippie
 
-        "Partir faire des courses":
-            jump choix2_hippie
+            "Allez boire un verre au bar":
+                $nbRejets_hippie += 1
+                jump choix2_punk
 
-        "Allez boire un verre au bar":
-            $nbRejets_hippie += 1
-            jump choix2_punk
+        jump suite1_done
+    label suite1_done:
+
+    label suite2:
+
+        "Il commence à se faire tard, la nuit est déjà tombée. "
+        "Je travaille également demain, avec un autre groupe que je n’ai pas encore rencontré."
+        "Je vais essayer de ne pas faire de folies ce soir et avoir l’air frais pour donner une bonne première impression."
+        "En arrivant devant mon immeuble, je remarque quelques personnes en train de fumer devant l’entrée, discutant bruyamment sans faire attention aux autres personnes alentours."
+        "D’ailleurs, ils semblent ignorer volontairement les personnes essayant d’entrer, présentement une vieille personne avec son caddie à courses, qui essaye de les interpeller sans succès."
+        "Les trois personnes, chauves, vont jusqu’à pousser la vieille femme lorsqu’elle tente de passer à coté d’eux, la faisant chuter lourdement au sol. "
+        "Je ne peux pas rester sans réagir."
+
+        "Moi" "Eh ! Qu’est ce que vous pensez faire là ? Ça va pas ?"
+
+        "Aidant la vieille femme à se relever, je fusille les trois voyous du regard. "
+        "Ils portent des vestes militaires et me rendent mon regard. "
+        "Je frisonne en remarquant le tatouage sur la nuque de l’un d’entre eux, rappelant les heures sombres du pays."
+        "C’est bien ma veine, de tomber sur des skinheads si peu de temps après avoir emménagé."
+        "S’ils traînent dans le voisinage, il faudra que je fasse attention."
+        "Voyant qu’il ne réagissent cependant pas plus que ça, se contentant de ricaner, je les ignore et aide la vieille femme à rentrer dans l’immeuble. "
+        "Par un fait du hasard, elle se trouve être ma voisine de palier."
+
+        voisine "Merci beaucoup monsieur. Ces voyous rendent la vie ici impossible, ils se croient tout permis ! "
+        voisine "Cela fait plaisir de voir qu’il y a encore des gens bien dans ce monde."
+        "Moi" "Ils sont souvent par ici ?"
+        voisine "Oh oui ! Mais ils traînent également dans d’autres quartiers, à faire chasse à tous ceux qu’ils jugent \" impures \". "
+        voisine "Vous devriez faire attention à vous jeune homme, ils vous chercheront sûrement des noises après ce soir."
+        "Moi" "Pas de soucis madame, je sais me défendre. Je vous souhaite une bonne soirée cependant, je dois me lever tôt demain."
+        voisine "Il n’y a pas de soucis. Passez prendre une tasse de thé un de ces quatre. Bonne soirée."
+
+        "Je rentre dans mon appartement, laissant la vieille femme rentrer chez elle."
+        "Je ne m’attendais pas à passer une soirée si agitée. Il faudra que je fasse attention dans le voisinage désormais. "
+        "Le coin n’est clairement pas aussi tranquille que le prétendais le promoteur immobilier."
+        "La journée à été longue, autant aller se coucher directement."
 
 
-    "Il commence à se faire tard, la nuit est déjà tombée. "
-    "Je travaille également demain, avec un autre groupe que je n’ai pas encore rencontré."
-    "Je vais essayer de ne pas faire de folies ce soir et avoir l’air frais pour donner une bonne première impression."
-    "En arrivant devant mon immeuble, je remarque quelques personnes en train de fumer devant l’entrée, discutant bruyamment sans faire attention aux autres personnes alentours."
-    "D’ailleurs, ils semblent ignorer volontairement les personnes essayant d’entrer, présentement une vieille personne avec son caddie à courses, qui essaye de les interpeller sans succès."
-    "Les trois personnes, chauves, vont jusqu’à pousser la vieille femme lorsqu’elle tente de passer à coté d’eux, la faisant chuter lourdement au sol. "
-    "Je ne peux pas rester sans réagir."
+        #METTRE FONDU NOIR
 
-    "Moi" "Eh ! Qu’est ce que vous pensez faire là ? Ça va pas ?"
+        # Journée 2 enft
+        "Allez, c’est parti pour une nouvelle journée de travail. "
+        "Je me demande pourquoi le groupe d’aujourd’hui ne voulait pas faire la présentation en même temps que les autres."
+        #scene studio
+        "Enfin, ils ne devraient pas tarder."
 
-    "Aidant la vieille femme à se relever, je fusille les trois voyous du regard. "
-    "Ils portent des vestes militaires et me rendent mon regard. "
-    "Je frisonne en remarquant le tatouage sur la nuque de l’un d’entre eux, rappelant les heures sombres du pays."
-    "C’est bien ma veine, de tomber sur des skinheads si peu de temps après avoir emménagé."
-    "S’ils traînent dans le voisinage, il faudra que je fasse attention."
-    "Voyant qu’il ne réagissent cependant pas plus que ça, se contentant de ricaner, je les ignore et aide la vieille femme à rentrer dans l’immeuble. "
-    "Par un fait du hasard, elle se trouve être ma voisine de palier."
+        skh "Oy, c’est toi le nouveau ?"
 
-    voisine "Merci beaucoup monsieur. Ces voyous rendent la vie ici impossible, ils se croient tout permis ! "
-    voisine "Cela fait plaisir de voir qu’il y a encore des gens bien dans ce monde."
-    "Moi" "Ils sont souvent par ici ?"
-    voisine "Oh oui ! Mais ils traînent également dans d’autres quartiers, à faire chasse à tous ceux qu’ils jugent \" impures \". "
-    voisine "Vous devriez faire attention à vous jeune homme, ils vous chercheront sûrement des noises après ce soir."
-    "Moi" "Pas de soucis madame, je sais me défendre. Je vous souhaite une bonne soirée cependant, je dois me lever tôt demain."
-    voisine "Il n’y a pas de soucis. Passez prendre une tasse de thé un de ces quatre. Bonne soirée."
+        "Oh bon sang."
 
-    "Je rentre dans mon appartement, laissant la vieille femme rentrer chez elle."
-    "Je ne m’attendais pas à passer une soirée si agitée. Il faudra que je fasse attention dans le voisinage désormais. "
-    "Le coin n’est clairement pas aussi tranquille que le prétendais le promoteur immobilier."
-    "La journée à été longue, autant aller se coucher directement."
+        skh "Mais quelle bonne surprise ! Si c’est pas le gringalet d' hier soir ! "
+        skh "Je sens qu’on va bien s’amuser ensemble."
+        "Moi" "Vous êtes le groupe Plus Plus Plan ? "
+        skh "Et comment ! Tu trouveras pas meilleur que nous dans le coin. "
+        skh "Les trois autres groupes minables de ce studio ne nous arrivent pas à la cheville ! "
+        skh "Tu vas voir que lors de votre festival minable, c’est nous qui allons tout remporter. "
+        "Moi" "Eh bien nous allons pouvoir voir ça. La séance d’enregistrement va commencer, vous pouvez y aller."
 
+        #fondu noir pour faire comprendre qu'on est plus tard
+        "Ça m'embête de le dire, mais ils sont effectivement très doués. "
+        "C’est frustrant, mais en l’état, ce sont les favoris pour gagner le festival."
 
-    #METTRE FONDU NOIR
+        skh "Alors minable, t’en as pensé quoi ? Ça envoie du lourd non ?"
+        "Moi" "C’est pas mal en effet. Je ne pense pas que vous ayez besoin de plus de sessions avant le festival. "
+        "Moi " "Je vais me concentrer sur les autres groupes d’ici là."
+        skh "Ah ! Dis plutôt que t’as la trouille de nous revoir ! "
+        skh "Mais ça nous va, moins on voit ta gueule de fouine, mieux on se porte. Et ça nous donne plus de temps pour… He he he…"
 
-    # Journée 2 enft
-    "Allez, c’est parti pour une nouvelle journée de travail. "
-    "Je me demande pourquoi le groupe d’aujourd’hui ne voulait pas faire la présentation en même temps que les autres."
-    #scene studio
-    "Enfin, ils ne devraient pas tarder."
+        "Je n’ai même pas envie d’imaginer ce qu’il laisse sous entendre. "
+        "La journée à été suffisamment épuisante comme ça, juste par leur présence malsaine dans le studio."
+        "Je rentre chez moi sans incidents. "
+        "Demain, il faudra que je choisisse quel groupe appeler pour une session d’enregistrement. "
 
-    skh "Oy, c’est toi le nouveau ?"
+        jump suite2_done
+    label suite2_done:
 
-    "Oh bon sang."
-
-    skh "Mais quelle bonne surprise ! Si c’est pas le gringalet d' hier soir ! "
-    skh "Je sens qu’on va bien s’amuser ensemble."
-    "Moi" "Vous êtes le groupe Plus Plus Plan ? "
-    skh "Et comment ! Tu trouveras pas meilleur que nous dans le coin. "
-    skh "Les trois autres groupes minables de ce studio ne nous arrivent pas à la cheville ! "
-    skh "Tu vas voir que lors de votre festival minable, c’est nous qui allons tout remporter. "
-    "Moi" "Eh bien nous allons pouvoir voir ça. La séance d’enregistrement va commencer, vous pouvez y aller."
-
-    #fondu noir pour faire comprendre qu'on est plus tard
-    "Ça m'embête de le dire, mais ils sont effectivement très doués. "
-    "C’est frustrant, mais en l’état, ce sont les favoris pour gagner le festival."
-
-    skh "Alors minable, t’en as pensé quoi ? Ça envoie du lourd non ?"
-    "Moi" "C’est pas mal en effet. Je ne pense pas que vous ayez besoin de plus de sessions avant le festival. "
-    "Moi " "Je vais me concentrer sur les autres groupes d’ici là."
-    skh "Ah ! Dis plutôt que t’as la trouille de nous revoir ! "
-    skh "Mais ça nous va, moins on voit ta gueule de fouine, mieux on se porte. Et ça nous donne plus de temps pour… He he he…"
-
-    "Je n’ai même pas envie d’imaginer ce qu’il laisse sous entendre. "
-    "La journée à été suffisamment épuisante comme ça, juste par leur présence malsaine dans le studio."
-    "Je rentre chez moi sans incidents. "
-    "Demain, il faudra que je choisisse quel groupe appeler pour une session d’enregistrement. "
 
 
     # --------------------------------------------------------------------------
     # ----- JOURNEE 2 -----3
-    jour += 1
+    $jour += 1
 
     "Le bruit de mon reveil insupportable me tire de mon sommeil."
     "Apres la journée d'hier, j'ai une petite appréhension de comment celle d'aujourd'hui va tourner."
@@ -207,10 +216,13 @@ label start:
         "non":
             jump marchand_non
 
+    label suite02:
+        "En arrivant je découvre cette fois le studio dans un silence assez effrayant. "
+        "Aujoud'hui je vais devoir choisir un des trois groupes que j'ai rencontré hier pour commencer à enregistrer."
+        "J'hésite..."
+        jump suite02_done
+    label suite02_done:
 
-    "En arrivant je découvre cette fois le studio dans un silence assez effrayant. "
-    "Aujoud'hui je vais devoir choisir un des trois groupes que j'ai rencontré hier pour commencer à enregistrer."
-    "J'hésite..."
     # Decision session studio de la journée
     menu:
         "Je vais appeler le groupe Effervecence.":
@@ -230,7 +242,7 @@ label start:
 
     # --------------------------------------------------------------------------
     # ----- JOURNEE 3 -----
-    jour += 1
+    $jour += 1
 
     # Aller chez le marchand ou non ?
     menu:
@@ -239,6 +251,10 @@ label start:
         "non":
             jump marchand_non
 
+    label suite03:
+        "jour3"
+        jump suite03_done
+    label suite03_done:
 
     # Decision session studio de la journée
     menu:
@@ -280,7 +296,7 @@ label start:
 
     # --------------------------------------------------------------------------
     # ----- JOURNEE 4 -----
-    jour += 1
+    $jour += 1
 
     # Aller chez le marchand ou non ?
     menu:
@@ -289,6 +305,10 @@ label start:
         "non":
             jump marchand_non
 
+    label suite04:
+        "jour 4"
+        jump suite04_done
+    label suite04_done:
     # Decision studio
     menu:
         "Marie-Anne":
@@ -318,7 +338,7 @@ label start:
                     jump goodEnding_3
                 "non":
                     if (amitie_got <= 4 or amitie_hippie <= 4):
-                        #coder choix ici
+                        jump goodEnding_3
 
                     else:
                         "on va tous le chercher"
@@ -342,13 +362,21 @@ label start:
     # --------------------------------------------------------------------------
     # Aller chez le marchand ou non ?
     label marchand_oui:
-        march "bonjour"
+        march "bondour"
         # coder ici l'interface du marchand
         jump marchand_done
 
     label marchand_non:
         "Pas le temps je suis deja en retard..."
         jump marchand_done
+    label marchand_done:
+        jump suite02
+        #if ($jour == 2):
+            #jump suite02
+        #if ($jour == 3):
+            #jump suite03
+        #if ($jour == 4):
+            #jump suite04
 
 
     # --------------------------------------------------------------------------
@@ -365,24 +393,24 @@ label start:
         hippie "Excusez moi hahaha ! Je suis Jeanne, membre du groupe Quatuor, on m'a dit de venir aujourd'hui concernant un festival donc me voici !"
         hippie "C'est un plaisir de vous rencontrer"
 
-        got "Ouais, désolée. Je m'appelle Anne-Marie et suis la guitariste de mon groupe Effervecence"
+        got "Ouais, désolée. Je m'appelle Marie-Anne et suis la guitariste de mon groupe Effervecence"
 
         jump choix1_done
 
-    label choix2_non:
+    label choix1_non:
         $menu_flag = False
 
-        got "continue de senerver"
+        got "continue de s'énerver"
         jump choix1_done
+
+    label choix1_done:
+        jump suite1
 
 
     # --------------------------------------------------------------------------
     # Choix 2 : Premiere balade du soir
     label choix2_got:
         $amitie_got += 1
-
-
-
 
         jump choix2_done
 
@@ -402,7 +430,7 @@ label start:
         "Trop tard, la fille aux vêtements colorés m’a vu."
         "Elle fend la foule et m’attrape par la manche et me regarde avec un sourire béat."
 
-        Moi "Euuuh..."
+        "Moi" "Euuuh..."
 
         if menu_flag:
             hippie "Ah, je suis contente de voir que tu t’intéresse au bien être animal ! "
@@ -486,9 +514,10 @@ label start:
         "..."
         "Bon, je vais finir ma bière et je vais rentrer."
 
-
-        punk "oui oui blabla"
         jump choix2_done
+
+    label choix2_done:
+        jump suite2
 
 
     # --------------------------------------------------------------------------
@@ -502,7 +531,7 @@ label start:
 
         got "Hmmmm ! Allo ?"
         "Ca a décroché !"
-        "Moi" "Bonjour c'est " nom " l'ingé son d'hier, j'ai décidé de commencer à enregistrer avec votre groupe, il m'avait bien plu."
+        "Moi" "Bonjour c'est [nom] l'ingé son d'hier, j'ai décidé de commencer à enregistrer avec votre groupe, il m'avait bien plu."
         got "Oh merde !"
         got "En voyant ta petite gueule on pensait pas que tu nous choisirait en premier."
         got "T'es plus sympa que je pensais ! Bah attends nous, on arrive."
@@ -612,7 +641,8 @@ label start:
                 "Je vais prendre comme toi":
                     $nbBieres += 1
 
-                "Je vais prendre un Coca"
+                "Je vais prendre un Coca":
+                    punk "Ah ouais."
 
             punk "Voilà, on est mieux ici. Moins de monde qu’à l’intérieur."
             "Moi" "Je suis surpris, je croyais qu’en tant que musicien tu apprécierait plus les foules."
@@ -628,7 +658,8 @@ label start:
                 "Je prends la même bière que toi":
                     $nbBieres += 1
 
-                "Je vais prendre un cocktail sans alcool"
+                "Je vais prendre un cocktail sans alcool":
+                    punk "Vraiment ?"
 
             punk "Voilà ton verre."
             "Moi" "Merci. "
@@ -670,13 +701,14 @@ label start:
                     $menu_flag2 = True
                     $nbBieres += 1
 
-                "Je vais boir de l'eau pour cette fois"
+                "Je vais boir de l'eau pour cette fois":
+                    punk "T'es nul."
 
             punk "Tiens."
             "Moi" "Merci."
 
             "Je regarde Patrick enfiler son verre cul-sec"
-            if menu_flag2:
+            if $menu_flag2:
                 punk "Alors ? Je t’attends là en fait."
 
                 "Je crois qu'il veut que je cul-sec aussi..."
@@ -685,7 +717,9 @@ label start:
                         punk "Voilà ! Ça me plaît ! "
                         punk "Allez viens avec moi on va faire un tour et j’te raccompagne chez toi."
 
-                    "Je préfere en rester la..."
+                    "Je préfere en rester la...":
+                        punk "Je t'imaginais plus olé olé"
+
 
             "En passant à côté d’une ruelle sombre, deux skinhead nous alpaguent."
 
@@ -695,7 +729,7 @@ label start:
 
             "OULA ! Patrick frappe un des deux skinhead."
 
-            if nbBieres == 3:
+            if $nbBieres == 3:
                 jump bagarre
 
             else:
@@ -712,6 +746,9 @@ label start:
 
         jump choix3_done
 
+
+    label choix3_done:
+
     label bagarre:
         #MINI JEU BAGARRE
 
@@ -727,7 +764,7 @@ label start:
 
         # si victoire
         "Après quelques coups reçus, les skinheads ont pris la fuite."
-        punk "Bien joué ! Tu lui as bien monté au tien." #???????? c'est quoi cette phrase
+        punk "Bien joué ! Tu lui as bien montré au tien."
         "Je pourrais en dire autant de toi."
         punk "Oh quel plaisir de les voir prendre leur jambes à leur cou."
         "Moi" "Ouais, c’est vrai que c’est grisant, je peux comprendre que tu apprécies autant."
@@ -739,6 +776,7 @@ label start:
         "Tandis que je regarde Patrick s'éloigner, je décide qu'il est temps pour moi de rentrer également."
 
         jump bagarre_done
+    label bagarre_done:
 
 
 
@@ -747,11 +785,25 @@ label start:
     # Choix 4 : Choix session studio
     label choix4_got:
         if (amitie_got >= 5):
-            got "tu veux date glauque avec moi ?"
+            got "Allo ?"
+            "Moi" "Bonjour c’est [nom], je t’appelle pour savoir si tu avais envie de refaire une session aujourd’hui ?"
+            # si choix got la veille
+            got "Oh oui bien sûr ! ça été hier après que je sois parti ?"
+            "Moi" "Nan tu m'as quand même laissé comme un imbécile au milieu d’un cimetière !"
+            got "Mais je suis sûre que tu t'es bien amusé nan ?"
+            "Moi" "Je peux pas dire le contraire mais je ne te ferai pas ce plaisir !"
+            got "Ah ah ! Parfait alors on arrive, à tout à l’heure !"
+
+            "Sans que je puisse répondre elle raccroche."
+            "Je n’ai plus qu' à attendre qu’ils arrivent."
+            "Après une session plutôt mouvementée par leur entrain, nous finissons assez tard."
+            "Il doit bientôt être 1h du matin maintenant."
+
+            got "Hey ! [nom] t'as faim ? Ca te dirait de venir manger dehors ?"
             menu:
-                "oui":
+                "Ouais je mangeras bien un truc la.":
                     jump date2_got
-                "non":
+                "Je me suis déjà préparé un repas à me réchauffer désolé...":
                     "fin de journee"
                     "tu apprends que la goth est en prison"
                     "----- BAD ENDING 1 -----"
@@ -771,40 +823,41 @@ label start:
         punk "Ça te dirait de remettre ça avec les fachos ? "
         punk "J’ai entendu dire qu’ils avaient un rassemblement ce soir."
         menu:
-            "Je vais le suivre, j’ai peur qu'il lui arrive quelque chose de grave.":
+            "(Je vais le suivre, j’ai peur qu'il lui arrive quelque chose de grave.)":
                 "Je crois qu'ils n'ont pas compris la dernière fois en effet."
                 $amitie_punk += 1
                 "--- Votre amitié avec Patrick augmente ---"
                 punk "Parfait ! Viens avec moi on va chercher des baramines et on va leur montrer à ces sales fachos!"
                 "Moi" "Je te suis."
 
-                "Je suis donc Patrick. Nous arrivons rapidement dans une rue ou on peut voir les baramines."
+                "Il attrape un sac au sol que je n’avais pas vu et me met un pied de biche dans les mains après en avoir attrapé un pour lui."
                 punk "C’est parti, on va les démolir."
 
                 "Est-ce que j'essaie de le convaincre de se calmer et de ne pas y aller ?"
                 # MINI JEU CONVAINCRE LE PUNK DE NE PAS Y ALLER
 
-                
+                # si echec
+                "je l'accompagne ou pas ?"
                 menu:
                     "oui":
-                        punk "je m'ouvre et renonce a la rix"
-                        "les fa entendent la conv"
+                        jump badEnding_3
                     "non":
-                        "je vais avec lui ?":
-                            "oui":
-                                jump badEnding_3
+                        jump badEnding_4
 
-                            "non":
-                                jump badEnding_4
+                # si reussite
+                jump date1_punk
 
 
-            "Désolé mais ce sera sans moi... J'ai encore mal aux côtes.":
+
+            "(J’ai trop peur de me faire démolir. Je n’y vais pas.)":
+                "Moi" "Ce sera sans moi haha..."
                 punk "Mauviette ! "
                 punk "Allez dégage, j’y vais moi !"
                 jump badEnding_4
 
 
 
+    label choix4_done:
 
 
 
@@ -818,7 +871,7 @@ label start:
 
         "Après un bon moment à les suivre, nous arrivons devant une grande grille."
         "\"Cimetière de ...\""
-        scene bg cimetiere5
+        #scene bg cimetiere5
 
         "Moi" "Mais qu'est-ce qu'on fait la !?"
         got "Bah notre soirée pourquoi ?"
@@ -827,7 +880,7 @@ label start:
         "Qui fait une soirée dans un cimetière sérieux."
 
         "Le groupe reprend leur marche après avoir poussé dans un long grincement le portail."
-        scene bg cimetiere2
+        #scene bg cimetiere2
         "Après quelques instants, ils s'asseoient sur des tombes en ruine et allument leur enceinte."
         "Complètement ahuri, je contemple cette scène."
         "Trois personnes dansent sur du rock gothique dans un cimetière."
@@ -846,7 +899,7 @@ label start:
         # ----- Mini jeu course poursuite -----
         $amitie_got += 1
 
-        scene bg cimetiere3
+        #scene bg cimetiere3
         "J'ai perdu les membres du groupe et j'ai l'impression que je suis le seul à être poursuivi."
         "En passant un angle entre plusieurs tombes, une main sort d'entre deux plaques marbrées et m'attire."
         "Marie-Anne me tient fermement et me plaque contre elle"
@@ -937,19 +990,177 @@ label start:
 
             "Les balles de jonglage me tentent un peu plus !":
                 "choix jonglage"
+        jump date1_done
+
+
+    label date1_punk:
+
+        punk "T’as raison on ferait mieux de pas faire ça."
+        punk "J’suis désolé de t’avoir embarqué là-dedans."
+        "Moi" "C’est pas grave."
+        punk "Si, c’est plutôt grave. "
+        punk "J’ai été aveuglé par ma haine envers eux, et on aurait pu se faire tuer si tu m’avais pas convaincu. "
+        "Moi" "Je sais, mais c’est mieux de s’en rendre compte maintenant que trop tard. "
+        "Moi" "Mais j’aimerai bien comprendre d'où te vient cette rancœur. "
+        punk "Tu veux dire au-delà de leur racisme ouvert et de leur haine de tous ceux qui sont différents?"
+        "Moi" "Je sais que ce ne sont pas les personnes les plus recommandables."
+        "Moi" "Bon nombre de personnes les ont en horreur, et pourtant personne ne les passe à tabac dans la rue."
+        punk "J’sais bien, mais j’ai mes raisons."
+        "Moi" "J'aimerais bien connaître les raisons qui te poussent à ce genre d'extrémités."
+
+        "A peine ces mots ont quitté ma bouche que sa posture se referme."
+
+        punk "C’pas tes oignons !"
+        "Moi" "Écoute, je ne suis pas là pour fouiller ton passé, mais j’ai pas envie que tu te fasses du mal."
+
+        "Il semble rougir brièvement."
+
+        "Moi" "Je n’ai pas envie d’être lourd et d’insister, mais je m'inquiète. C’est...."
+        punk "Je suis homosexuel !"
+
+        "Je le vois jeter son pied de biche par terre et commencer à s’en aller puis faire brusquement demi-tour."
+
+        punk "C’est pour ça que j’ai la rage contre tout et tout le monde! "
+        punk "J’ai pas le droit d’être moi-même! Jamais! Nulle part! "
+        punk "J’ai jamais pu vivre ma vie! Alors que j’y suis pour rien!"
+
+        "Il commence à fondre en larmes."
+
+        #cut sur fond noir
+        "Je l’ai raccompagné chez lui, et sur le chemin nous avons longuement échangé sur le sujet. "
+        "J’ai pu lui dire que moi même je n’étais pas sûr d’être à cent pour cent hétérosexuel, et je lui ai promis de garder le secret."
+
+        #cut sur ruelle avec skinhead
+        "Et bien dis donc, Patrick est un pd, voilà qui change tout…"
+
+
+        # DIALOGUE A CHANGER ICI
+        "Journée suivante"
+
+        "Je vais appeler Patrick aujourd’hui."
+        "..."
+        "..."
+        "Tiens, aucune réponse. C’est étrange."
+        "..."
+        "..."
+        "J'espère qu’il ne lui est rien arrivé de grave."
+
+        "Je devrais peut-être contacter les autres groupes pour voir s'ils arrivent à le contacter..."
+        menu:
+            "Non. Je vais aller directement chez lui.":
+                jump goodEnding_3
+
+
+
+            "Allez je les appelle.":
+                jump goodEnding_4
 
 
 
 
         jump date1_done
+    label date1_done:
 
 
     # DATE 2 :
     label date2_got:
-        got "c'est diner chandelle ajd"
-        "minijeu nourriture"
-        #coder si c'est reussi ou non, et donc si il y a un flirt ou non
+        got "Parfait tiens. "
+        got "On se dit rendez-vous dans 30 min ? Je dois aller récuperer des choses chez moi."
+
+        "A peine le temps d’acquiescer que je la vois disparaître derrière la porte du studio."
+        "En regardant ce qu'elle m'a donné, je comprends qu’il s’agit d’une adresse."
+        "J’imagine que c’est là où je dois aller."
+        "Ça me laisse le temps de ranger et fermer le studio au moins."
+        "En arrivant à l’adresse du bout de papier j'aperçois un cimetière, mais Marie-Anne n’est pas là. "
+        "En regardant au loin dans le cimetière j’aperçois de la lumière, surement Marie-Anne..."
+        "En arrivnt au niveau de la lumière je peux voir avec une certaine appréhension Marie-Anne en train de dresser une nappe sur deux tombes collées côte à côte."
+        "Elle y place plusieurs boites et quelques boissons."
+
+        got "Oh ! t'es deja la !"
+        got "Viens j’ai préparé quelques trucs."
+
+        "Pour pouvoir m’asseoir en face d’elle je dois enjamber quelques caveaux et urnes sur mon passage. "
+        "L’ambiance tout autour est un peu morbide, je ne peux pas voir à plus de dix mètres autour de moi et une brume commence à se former au loin."
+        "Pendant que je me perds en regardant tout autour de moi, j'aperçois Marie-Anne me regarder avec excitation."
+
+        got "Alors ! J’ai ramené plein de trucs différents et tu vas nous faire quelque chose !"
+
+        "Son excitation me laisse perplexe."
+        "Pourquoi est-elle si enjouée à l’idée de me laisser choisir des ingrédients dans des boîtes ?"
+
+        "Moi" "Tu veux que je fasse le repas ?"
+        got "Pas vraiment le faire."
+        got "J’ai plein de trucs dans mes boites, et je veux que tu fasses un bon mélange."
+        "Moi" "Heu... ok je peux essayer."
+        # MINI JEU NOURRITURE
+
+        #---si minijeu reussi---
         $flirt_got = True
+
+        "J’essaye tant bien que mal à préparer quelque chose en faisant abstraction de l’environnement qui m’entoure."
+        "Une fois fini je tend l’assiette composée des différents élements des boites à Marie-Anne."
+        "J’attend une réaction de sa part et je commence à fixer son visage, intrigué."
+        "Après quelques bouchées je vois un sourire commencer à s’afficher sur son visage."
+
+        got "C’est trop bon !"
+
+        "Elle me regarde avec de grands yeux comme une enfant qui découvre quelque chose de nouveau."
+
+        got "Hmmmm, j’aurais jamais imaginé que tu puisses faire quelque chose d’aussi bon !"
+        "Moi" "Merci, j’ai essayé de me creuser la tête pour faire quelque chose qui pourrait te plaire."
+        got "Juste pour me plaire ?"
+        #rougit
+        got "..."
+        got "Et toi tu aimes ?"
+
+        "Apres ces mots j’attrape une fourchette et prend une petite part dans son assiette."
+        "J’approche mon visage de ma fourchette et met ma main en dessous puis goûte ma création."
+        "Et bah on peut dire que j’ai réussi quelque chose de vraiment bon..."
+        "En ouvrant les yeux pour donner ma réponse à Marie-Anne, je m’aperçois que je me trouve à quelque centimètres de son visage."
+        "J’aperçois mieux que jamais son maquillage noir entourant ses yeux marrons."
+        "Malgré la couleur sombre j’aperçois quelque chose de plutôt lumineux dedans."
+        "Quelques secondes après avoir ouvert les yeux, Marie-Anne me repousse doucement et recule."
+        "Elle semble gênée et tourne la tête."
+
+        "Moi" "C’est vachement bon ! Je suis content de moi sur ce coup."
+        got "..."
+        "Moi" "C’est quoi les boissons que tu as apporté ?"
+        got "..."
+        "Moi" "Tu vas bien ?"
+        got "Ferme la !"
+        "Moi" "Hein ? Qu'est ce qu'il se passe ?"
+        got "T'étais obligé de t'approcher autant ?"
+
+        "J’ai l’impression de voir son visage rougir."
+        "Elle continue de cacher son visage avec ses mains et bras comme si elle voulait disparaître."
+        "Je me rapproche et met ma main sur son bras pour le baisser."
+
+        "Moi" "Hey, désolé j’ai pas fait exprès, ça va aller ?"
+        got "Oui, oui..."
+
+        "En lâchant son bras elle laisse tomber les mains de son visage et se retourne vers moi, laissant face à moi son visage rougi pas une gêne. "
+        "Elle à les yeux un peu humides les rendant brillants."
+
+        "Moi" "Wha…, tu es vraiment belle."
+        got "QUOIIIII ? JE..JE.. "
+
+        "Marie-Anne commence à devenir bien plus rouge que tout à l’heure."
+        "Son visage commence à me montrer un certaine gène et elle na pas l’air contente de ce que j’ai dit, merde."
+        "Elle se lève, essaye de marcher mais tape dans les boîtes posées au sol et pars vers la sortie du cimetière."
+        "Je la rattrape et lui attrape la main, mais elle enlève la sienne immédiatement, se retournant vers moi le visage encore plus rouge et les yeux humides. "
+        "Elle lève sa main vers le ciel."
+
+        got "T'es vraiment un connard !"
+
+        "Je sens le contact de sa main sur ma joue, je crois qu’elle a voulu me gifler."
+        "Je la regarde un peu perdu et constate qu’elle semble encore bien plus gênée."
+        "Elle repart vers la sortie puis s'arrête quelque mètres avant, et se retourne vers moi."
+
+        got "Mer… Merci pour la soirée, heu, heu... Bonne nuit."
+
+        "Je la regarde sans bouger partir au loin, repensant à ce qu’il vient de se passer et rigolant."
+        "Je me retourne vers notre table de fortune et range tout ce qui se trouve au sol avant de rentrer chez moi dans une certaine joie."
+
 
         jump date2_done
 
@@ -958,6 +1169,7 @@ label start:
         # peut etre rajouter une amitie ou un truc ici nn ?
 
         jump date2_done
+    label date2_done:
 
 
     label date3_got:
@@ -973,6 +1185,7 @@ label start:
     label date3_hippie:
         "il se passe ce qu'il se passe"
         jump goodEnding_2
+    label date3_done:
 
 
 
@@ -996,6 +1209,7 @@ label start:
     label badEnding_4:
         punk "je meurs"
         jump badEnding_done
+    label badEnding_done:
 
 
 
@@ -1009,8 +1223,40 @@ label start:
         jump goodEnding_done
 
     label goodEnding_3:
-        punk "festival punk yeeeeeaaaaahhh"
+
+        "Faites qu’il ouvre."
+        # Patrick ouvre la porte
+        "Dieu soit loué il va bien."
+        "Il n’as pas tout de même pas l’air dans son assiette."
+
+        "Moi" "Dieu merci tu vas bien. J’étais inquiet quand tu ne m’as pas répondu au téléphone."
+        punk "(soupir)  Ouais... Désolé."
+        "Moi" "Ca n’a pas l’air d’aller."
+        punk "Ouais, pas terrible."
+        "Moi" "Tu veux en parler ?"
+        punk "Pas sur que ça arrange la situation, mais si t’y tiens. Entre."
+
+        "Il me fait entrer dans son petit appartement, me mène jusqu’au salon et s’affale dans un fauteuil."
+        "Il me pointe du doigt le fauteuil en face du sien."
+
+        punk "Reste pas planté là assieds toi."
+
+        "Je m'exécute et m’assieds."
+
+        "Moi" "Dis moi tout, je t’écoute."
+        punk "Bah c’est vraiment très simple, tu te souviens de l’autre soir, quand je t’ai parlé de mon secret ?"
+        "Moi" "Oui, comme si c’était hier."
+        punk "Ben les skinheads de l’autre fois nous ont entendus et ils ont répandu la nouvelle en ville. "
+        punk "Plus personne veut me parler, et les seuls coups de fil que j’ai reçu aujourd’hui ça a été pour m’insulter. "
+        punk "Alors ouais, j’ai pas décroché."
+        "Moi" "Oh non, je suis terriblement désolé. Si j’avais su, je n'aurais pas insisté."
+        punk "C’pas ta faute, c’est même plutôt l’inverse."
+        punk "Sans cette discussion qu’on a eu, je l’aurai sûrement bien plus mal pris. "
+        punk "J’aurai peut-être pas tenu le coup."
+        "Moi" "Non, ne dis pas ça."
+
         jump goodEnding_done
+
 
     label goodEnding_4:
         "festival polyamoureux hehe"
@@ -1018,6 +1264,8 @@ label start:
 
     label goodEnding_5:
         "festival avec tous les groupes trop bien !!!"
+        jump goodEnding_done
+    label goodEnding_done:
 
 
 
@@ -1028,6 +1276,7 @@ label start:
     label neutralEnding_2:
         hippie "festival trop bieeeennn"
         jump neutralEnding_done
+    label neutralEnding_done:
 
 
 
