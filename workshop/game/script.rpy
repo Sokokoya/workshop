@@ -76,7 +76,7 @@ label start:
     "(Décroche le téléphone)"
     "Moi" "Allô? Oui maman! Oui je suis bien arrivé !"
     "Moi" "Oui je suis allé au studio tout à l’heure, le travail à l’air intéressant."
-    "Moi" "On doit préparer un festival dans un mois et je dois aller rencontrer trois groupes qui vont chacun faire une représentation si j’ai bien compris."
+    "Moi" "On doit préparer un festival dans un mois et je dois aller rencontrer quatre groupes qui vont chacun faire une représentation si j’ai bien compris."
     "Moi" "Oui je te tiens au courant maman."
     "Moi" "Moi aussi je t’aime, je dois aller au studio je te rappelle plus tard. Bisous !"
 
@@ -95,7 +95,7 @@ label start:
 
     "..."
     "Les voix de femmes proviennent en fait de mon studio..."
-    "Il n’y a seulement qu’elles ainsi qu’un homme posé dans un coin dans cette pièce, il a l’air d’observer comment se déroule la dispute depuis plusieurs minutes maintenant."
+    "Il n’y a qu’elles ainsi qu’un homme posé dans un coin dans cette pièce, il a l’air d’observer comment se déroule la dispute depuis plusieurs minutes maintenant."
     "Elles ne m’ont visiblement pas vu, trop investies dans leur discussion"
 
     "Est-ce que je les interrompt pour les prévenir de mon arrivée ?"
@@ -109,7 +109,7 @@ label start:
 
     label suite1:
         "Eh bien, j’aurais aimé avoir une première journée moins agitée..."
-        "Ces filles étaient intéressantes cependant, chacune à leur manière."
+        "Les deux filles étaient intéressantes cependant, chacune à leur manière."
         "Vu que je ne suis pas encore fatigué, autant visiter un peu la ville, pour me familiariser avec."
 
         menu:
@@ -130,7 +130,7 @@ label start:
     label suite2:
 
         "Il commence à se faire tard, la nuit est déjà tombée. "
-        "Je travaille également demain, avec un autre groupe que je n’ai pas encore rencontré."
+        "Je travaille également demain, avec l'autre groupe que je n’ai pas encore rencontré."
         "Je vais essayer de ne pas faire de folies ce soir et avoir l’air frais pour donner une bonne première impression."
         "En arrivant devant mon immeuble, je remarque quelques personnes en train de fumer devant l’entrée, discutant bruyamment sans faire attention aux autres personnes alentours."
         "D’ailleurs, ils semblent ignorer volontairement les personnes essayant d’entrer, présentement une vieille personne avec son caddie à courses, qui essaye de les interpeller sans succès."
@@ -173,7 +173,7 @@ label start:
 
         "Oh bon sang."
 
-        skh "Mais quelle bonne surprise ! Si c’est pas le gringalet d' hier soir ! "
+        skh "Mais quelle bonne surprise ! Si c’est pas le gringalet d'hier soir ! "
         skh "Je sens qu’on va bien s’amuser ensemble."
         "Moi" "Vous êtes le groupe Plus Plus Plan ? "
         skh "Et comment ! Tu trouveras pas meilleur que nous dans le coin. "
@@ -205,16 +205,16 @@ label start:
     # ----- JOURNEE 2 -----3
     $jour += 1
 
-    "Le bruit de mon reveil insupportable me tire de mon sommeil."
-    "Apres la journée d'hier, j'ai une petite appréhension de comment celle d'aujourd'hui va tourner."
+    "Le bruit de mon réveil insupportable me tire de mon sommeil."
+    "Après la journée d'hier, j'ai une petite appréhension de comment celle d'aujourd'hui va tourner."
     "Un café et une tranche de pain puis direction le studio."
     # Aller chez le marchand ou non ?
     "Est-ce que je passerais pas à la supérette du coin avant pour voir ce qu'ils proposent aujourd'hui ?"
     menu:
-        "oui":
-            jump marchand_oui
-        "non":
-            jump marchand_non
+        "Pourquoi pas ?":
+            jump magasin
+        "Je suis déjà en retard...":
+            "Une autre fois peut-être..."
 
     label suite02:
         "En arrivant je découvre cette fois le studio dans un silence assez effrayant. "
@@ -265,15 +265,39 @@ label start:
 
 
 
-        "Jeanne":
+        "Je vais appeler \"Quatuor\" aujourd’hui.":
             $amitie_hippie += 1
-            "session enregistrement"
+            "oui"
             if (flirt_hippie):
-                "est-ce que jai envie de continuer a flirt avec elle ?"
+                "Dans un but purement professionnel, bien sûr."
+                "La session se passe extrêmement bien, le groupe à bien progressé en quelques semaines."
+                "Après la session, Jeanne vient me voir."
+
+                hippie "Hey beau gosse, comment tu vas ? "
+                hippie "Merci pour la session d'enregistrement, on a vraiment progressé aujourd'hui. "
+                "Moi" "C'est vrai, vous étiez incroyables. "
+                "Moi" "Vous êtes clairement devenus les favoris pour le festival."
+                hippie "Hihi, disons qu'en plus de vouloir plaire au public, il y a une personne de plus à qui j'aimerais bien plaire."
+
+                "Je sens le fard me monter aux joues. "
+                "Je ne suis pas d'un naturel prude, mais cette fille fait ressortir de moi des aspects dont j'ignorais l'existence. "
+                "Et ce n'est pas pour me déplaire."
+
+                hippie "Sinon, cet aprem il y a une manif pour le bien être animal, mais si tu es libre ce soir, ça te dirait de me rejoindre dans le parc du Thabor ?"
+                "Moi" "C'est un rencard que tu me proposes ?"
+                hippie "Hihi, peut-être bien."
+
                 menu:
-                    "bah oui":
+                    "Je serais là !":
                         jump date2_hippie
-                    "oula non":
+
+
+                    "Je suis désolé, je ne pense pas que ça soit une bonne idée.":
+                        "Moi" "Je t'apprécie énormément, mais je pense que nos relations doivent rester professionnelles."
+                        hippie "Oh… Je… Je croyais que... "
+                        hippie "Je suis désolée."
+
+                        "Jeanne part en courant avant que je puisse l'arrêter."
                         if (nbRejets_hippie >= 4):
                             hippie "jai fait une overdose bg"
                             "----- BAD ENDING 2 -----"
@@ -298,6 +322,10 @@ label start:
     # ----- JOURNEE 4 -----
     $jour += 1
 
+    "Le studio commence vraiment à m'être familier."
+    "Les ombres des instruments ne me font plus croire à des monstres ou autres."
+    "Le reflet des lumières en allumant continue par contre à attirer mon oeil vers le téléphone."
+    "Est-ce que je vais chez les marchand pour voir s'il a des nouveautés ?"
     # Aller chez le marchand ou non ?
     menu:
         "oui":
@@ -309,24 +337,38 @@ label start:
         "jour 4"
         jump suite04_done
     label suite04_done:
+
+
+    "C’est la dernière session d’enregistrement avant le festival."
     # Decision studio
     menu:
-        "Marie-Anne":
+        "Le groupe \"Effervecence\" me plait bien.":
             $amitie_got += 1
+
             if (flirt_got):
+                got "Allo ? [nom] ?"
+                "Moi" "Oui, j’ai une surprise qui je pense va te plaire. "
+                "Moi" "Tu peux venir faire une session de suite ?"
+                got "J’ARRIVE !"
                 jump date3_got
             else:
                 jump choix4_got
 
-        "Jeanne":
+        "Je vais appeler \"Quatuor\".":
             $amitie_hippie += 1
-            "session enregistrement"
-            hippie "tu veux venir chez moi ?"
+
+            "Moi" "Hey ! Super session comme d’habitude. "
+            "Moi" "Vous vous sentez prêt pour le festival ?"
+            hippie "Plus que jamais, on va tout déchirer. "
+            "Moi" "Haha, super, je sens que vous êtes motivés. On se revoit là-bas ?"
+            hippie "Attends ! ça te dirait de venir à ma roulotte ce soir ?"
+            hippie "Je t’aurais bien dit de venir avant, mais il y a encore une autre manif auquel je dois participer."
+
             menu:
-                "elle est bonne oui":
+                "J'ai vraiment envie de me rapprocher d'elle.":
                     jump date3_hippie
 
-                    "elle est chiante a forcer ptn"
+                    "Je préfère que l'on se concentre sur le festival."
                     jump neutralEnding_2
 
         "Patrick":
@@ -361,46 +403,127 @@ label start:
 
     # --------------------------------------------------------------------------
     # Aller chez le marchand ou non ?
-    label marchand_oui:
-        march "bondour"
-        # coder ici l'interface du marchand
-        jump marchand_done
 
-    label marchand_non:
-        "Pas le temps je suis deja en retard..."
-        jump marchand_done
-    label marchand_done:
-        jump suite02
-        #if ($jour == 2):
-            #jump suite02
-        #if ($jour == 3):
-            #jump suite03
-        #if ($jour == 4):
-            #jump suite04
+    label magasin:
+        hide screen inventory
+        show astride with dissolve
+        march "Bienvenue dans mon humble boutique ! Que désirez vous acheter ?"
+
+        show screen bracelet
+        show screen canette
+        show screen pendentif
+        $ renpy.pause()
+
+        jump magasin_done
+    label magasin_done:
+
+
+    label achat_bracelet:
+        hide screen bracelet
+        hide screen canette
+        hide screen pendentif
+
+        if thune<200:
+            march "Vous n'avez pas assez d'argent !"
+            jump magasin
+        else:
+            $ thune = thune-200
+            $inventaire.append(braceletOS)
+            #ligne de commande pour afficher inventaire
+            #ajouter un hide screen inventory quand on veut le cacher
+            show screen inventory
+
+            march "Merci pour votre achat !"
+            jump magasin
+        jump achat_done
+
+    label achat_canette:
+        hide screen bracelet
+        hide screen canette
+        hide screen pendentif
+
+        if thune<200:
+            march "Vous n'avez pas assez d'argent !"
+            jump magasin
+        else:
+            $ thune = thune-200
+
+            $inventaire.append(canetteP)
+            #ligne de commande pour afficher inventaire
+            #ajouter un hide screen inventory quand on veut le cacher
+            show screen inventory
+
+            march "Merci pour votre achat !"
+            jump magasin
+        jump achat_done
+
+    label achat_pendentif:
+        hide screen bracelet
+        hide screen canette
+        hide screen pendentif
+
+        if thune<200:
+            march "Vous n'avez pas assez d'argent !"
+            jump magasin
+        else:
+            $ thune = thune-200
+
+            $inventaire.append(pendentifH)
+            #ligne de commande pour afficher inventaire
+            #ajouter un hide screen inventory quand on veut le cacher
+            show screen inventory
+
+            march "Merci pour votre achat !"
+            jump magasin
+        jump achat_done
+    label achat_done:
+
 
 
     # --------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     # Choix 1 : Interrompre les deux femmes ou non
     label choix1_oui:
-        $menu_flag = True
+        if $pasInterrompre:
+            $interrompre = False
+        else:
+            $interrompre = True
 
         "Moi" "Bonjour, est-ce que je pourrais savoir qui vous êtes ?"
-        got "Excusez-moi mais que faites vous ici ? Comment avez vous fait pour rentrer ?"
+        "Gothique" "Excusez-moi mais que faites vous ici ? Comment avez vous fait pour rentrer ?"
         "Moi" "Je suis [nom] . J'ai été embauché en tant qu'ingé son dans ce studio. Et pour répondre à votre question, la porte était ouverte."
-        hippie "Hahahaha !"
+        "Hippie" "Hahahaha !"
         "Moi" "Pourriez vous me dire qui vous êtes ?"
 
-        hippie "Excusez moi hahaha ! Je suis Jeanne, membre du groupe Quatuor, on m'a dit de venir aujourd'hui concernant un festival donc me voici !"
+        hippie "Excusez moi hahaha ! Je suis Jeanne, membre du groupe \"Quatuor\", on m'a dit de venir aujourd'hui concernant un festival donc me voici !"
         hippie "C'est un plaisir de vous rencontrer"
+        got "Ouais, désolée. Je m'appelle Marie-Anne et suis la guitariste de mon groupe \"Effervecence\"."
 
-        got "Ouais, désolée. Je m'appelle Marie-Anne et suis la guitariste de mon groupe Effervecence"
+        "L'homme qui observait la dispute se leve et se rapproche du petit attroupement."
+
+        punk "Oy, moi c'est Patrick. Je gère les \"Perruquiers noirs\", les autres membres ne devraient pas tarder à arriver."
+
+        "Nous continuons à discuter jusqu'à ce que, en effet, les autres membres de chaque groupe arrivent."
+        "J'ai également appris que le quatrième groupe qui devait venir ne viendrait en fait que demain, seul."
+        "Un peu déçu de ne pas les voir, je me concentre tout de même sur les trois qui se trouvent en face de moi."
+        "Ils passent les uns après les autres me montrer quelques titres qu'ils produisent chaque semaine dans des bars."
+        "Chaque groupe est unique et a sa patte qui les diffèrent des autres."
+
 
         jump choix1_done
 
     label choix1_non:
-        $menu_flag = False
+        $pasInterrompre = True
 
-        got "continue de s'énerver"
+        # ECRIRE ICI
+        "Gothique" "Il est déjà en retard, je ne pars pas sur de bonnes bases avec lui personnellement."
+        "Gothique" "Qu'il aille se faire voir s'il ose se plaindre parce qu'on accueille mal."
+        "Hippie" "Marie-Anne du calme."
+        "Gothique" "Je me calmerai quand je le verrai pointer le bout de son nez !"
+        "Gothique" "C'est pas une hippie comme toi qui va me dire quoi faire !"
+
+        "Je crois qu'elles vont bientot en passer aux mains, je ferais mieux de les arrêter maintenant..."
+        jump choix1_oui
         jump choix1_done
 
     label choix1_done:
@@ -412,6 +535,7 @@ label start:
     label choix2_got:
         $amitie_got += 1
 
+        # ECRIRE ICI
         jump choix2_done
 
     label choix2_hippie:
@@ -432,7 +556,7 @@ label start:
 
         "Moi" "Euuuh..."
 
-        if menu_flag:
+        if $interrompre:
             hippie "Ah, je suis contente de voir que tu t’intéresse au bien être animal ! "
             hippie "Je ne savais pas trop quoi penser de toi au studio..."
             hippie "Vu que tu ne m’avais pas laissé finir d’expliquer à cette fille que porter des crânes d’animaux n’était pas très respectueux pour ces pauvres petits écureuils."
@@ -478,7 +602,7 @@ label start:
         $amitie_punk += 1
 
         "J’irais bien faire un tour au bar ce soir, ça pourrait m’aider à rencontrer du monde et à me familiariser avec la ville."
-        "*J'entre dans un bar et m‘approche du comptoir pour commander une bière"
+        "J'entre dans un bar et m‘approche du comptoir pour commander une bière"
 
         punk "Hey! Le nouveau! Ramène toi!"
         "Est-ce que je vais le rejoindre ?"
@@ -494,13 +618,13 @@ label start:
                 "Moi" "J’avais cru comprendre que vous préfériez que je me taise."
                 punk "Alors déjà, TU, ensuite quand  on bosse tu te tais, mais là on bosse pas."
 
-        if menu_flag:
-            punk "Par contre, t’as merdé, fallait les laisser s’arracher les cheveux au deux autres."
+        if interrompre:
+            punk "Par contre, t’as merdé, fallait les laisser s’arracher les cheveux aux deux autres."
             "Moi" "C’était mon premier jour, je ne voulais pas avoir d’ennuis."
             punk "Ouais bah la prochaine fois laisse les en venir au mains, j’ai un billet sur la gothique."
 
         else:
-            punk "D’ailleurs, merci de pas les avoir interrompues au studio. "
+            punk "D’ailleurs, merci de pas les avoir interrompues direct au studio. "
             punk "Tu m’as fait gagner un billet. "
             "Moi" "Un billet ?"
             punk "Ouais avec les gars on parie sur laquelle aura le dessus a chaque fois qu’elles s’engueulent."
@@ -533,14 +657,14 @@ label start:
         "Ca a décroché !"
         "Moi" "Bonjour c'est [nom] l'ingé son d'hier, j'ai décidé de commencer à enregistrer avec votre groupe, il m'avait bien plu."
         got "Oh merde !"
-        got "En voyant ta petite gueule on pensait pas que tu nous choisirait en premier."
+        got "En voyant ta petite gueule on pensait pas que tu nous choisirais en premier."
         got "T'es plus sympa que je pensais ! Bah attends nous, on arrive."
 
         "Je n'ai même pas eu le temps de répondre qu'elle a déjà raccroché."
         "Au moins ils ont l'air motivés."
 
         "La séance se passe sans réel problème."
-        "Le temps de m'accommoder à mes nouveaux outils, on a perdu un peu de temps, ce qui n'a pa eu l'air de gener le groupe."
+        "Le temps de m'accommoder à mes nouveaux outils, on a perdu un peu de temps, ce qui n'a pa eu l'air de gêner le groupe."
         "Quelques heures se sont passées et je crois qu'on arrive à la fin de notre première session d'enregistrement."
 
         if (amitie_got == 2):
@@ -578,12 +702,13 @@ label start:
         "Le groupe \"Quatuor\" passe la journée au studio et s’améliore beaucoup !"
 
         $amitie_hippie += 1
-        "Vous devenez plus ami avec Jeanne !"
+        "---Vous devenez plus ami avec Jeanne !---"
 
         "Moi" "La séance est terminée, merci beaucoup."
         hippie "Beau travail aujourd’hui !"
 
         if amitie_hippie < 2:
+            # REVOIR AVEC BASTIEN ICI
             "Moi" "Merci pour l’occasion, on en avait vraiment besoin…"
             hippie "Merci à toi, c’était sympa !"
             "Moi" "Hey, merci ! Ça fait toujours plaisir de venir ici."
@@ -801,7 +926,7 @@ label start:
 
             got "Hey ! [nom] t'as faim ? Ca te dirait de venir manger dehors ?"
             menu:
-                "Ouais je mangeras bien un truc la.":
+                "Ouais je mangerais bien un truc la.":
                     jump date2_got
                 "Je me suis déjà préparé un repas à me réchauffer désolé...":
                     "fin de journee"
@@ -924,7 +1049,6 @@ label start:
 
     label date1_hippie:
         $amitie_hippie += 1
-        $flirt_hippie = True
 
         hippie "Oh super ! Tu vas voir, je suis une super prof !"
 
@@ -966,16 +1090,39 @@ label start:
                     "Elle se dandine d’un pied sur l’autre, gênée. "
                     "Plusieurs fois elle semble vouloir dire quelque chose, avant de se raviser. "
 
-                    # CHOIX FLIRT
-                    "flirt"
                     if (amitie_hippie > 4):
-                        "est-ce que je flirte avec elle ?"
+                        "..."
                         menu:
-                            "oui allez":
+                            "J'aimerai bien me rapprocher d'elle.":
                                 $amitie_hippie += 1
-                                hippie "oh que tu es beau"
-                            "non c'est non":
-                                "fin de journee"
+                                $flirt_hippie = True
+                                "Suivant mon instinct, je fais un pas en avant vers elle avant qu’elle ne puisse reprendre la parole."
+                                "Moi" "Ça ne me dérangeais pas tu sais. Un câlin par une aussi jolie fille, ça ne se refuse pas..."
+
+                                "Aaaaaah, mais qu’est ce que je raconte ? Non mais ça va pas ? "
+                                "Elle va me coller une baffe et je vais me faire virer pour avoir fait des avances malpolies à une de mes artistes !"
+
+                                hippie "Vraiment ?"
+
+                                "Un sourire malicieux pointe le bout de son nez sur le visage de Jeanne. "
+                                "Elle semble avoir retrouvé cette assurance optimiste qui la définissait si bien."
+
+                                hippie "Et donc si je fais ça, cela ne te gêne pas non plus ?"
+
+                                "Jeanne passe son doigt sous mon menton..."
+                                "... avant de s’enfuir en riant."
+                                "C’est à mon tour de me retrouver à rougir, regardant Jeanne partir danser avec des enfants en sautillant. "
+                                "Cette fille a vraiment le cœur sur la main. "
+                                "Je la rejoins, et nous finissons ainsi la journée, à s’amuser avec toutes les autres personnes ici, tout en s’échangeant des regards complices."
+
+                                hippie "On se revoit bientôt au studio !"
+
+                                "Je rentre seul chez moi, en ayant cependant promis de se revoir bientôt."
+
+                            "Je préfere garder mes distances.":
+                                "Un moment de silence un peu gênant s'installa entre nous, avant que nous reprenions les exercices, essayant de faire comme si rien ne s’était passé. "
+                                "J’aurais peut-être dû dire quelque chose ?"
+                                "La journée arriva à sa fin sans autre incident notable, et je fini par rentrer chez moi, seul."
 
 
                 else:
@@ -990,6 +1137,7 @@ label start:
 
             "Les balles de jonglage me tentent un peu plus !":
                 "choix jonglage"
+                # coder ici le choix diabolo
         jump date1_done
 
 
@@ -1031,7 +1179,7 @@ label start:
         "J’ai pu lui dire que moi même je n’étais pas sûr d’être à cent pour cent hétérosexuel, et je lui ai promis de garder le secret."
 
         #cut sur ruelle avec skinhead
-        "Et bien dis donc, Patrick est un pd, voilà qui change tout…"
+        skh "Et bien dis donc, Patrick est un pd, voilà qui change tout…"
 
 
         # DIALOGUE A CHANGER ICI
@@ -1094,6 +1242,52 @@ label start:
         "Moi" "Heu... ok je peux essayer."
         # MINI JEU NOURRITURE
 
+        #--- si minijzu perdu ---
+
+        "Après quelques bouchées son regard vient croiser le mien."
+
+        got "C’est original on va dire."
+
+        "Je goûte ma création et je me rends bien compte que tout cela n’est pas spécialement fameux."
+
+        "Moi" "Désolé ce n’est pas vraiment ce qu’on peut appeler un repas."
+        got "Ne t’excuse pas tant qu’on ne devient pas malade, ce ne sera pas l’un des pires repas de ma vie."
+
+        "Notre soirée continue dans une ambiance sympathique et un peu morbide du au lieu."
+        "Moi" "Pourquoi aimes-tu ce genre d’endroit ? "
+        "Moi" "Je dois avouer que je passe très peu de soirées dans ce genre d’endroit."
+        got "J’aime beaucoup l’ambiance calme des endroit peu fréquenter, je n’aime pas spécialement les cimetières."
+        got "Mais non loin du studio c’est le seul endroit ou je peux aller tard et être sur de ne croiser personne. "
+        got "Les seules personnes ici ne sont plus en mesure de me juger."
+
+        "Je sens une lègere pointe de tristesse sur sa dernière phrase."
+
+        "Moi" "Les gens te…"
+
+        "Je n’ai pas le temps de finir ma phrase que je vois le visage crispé de Marie-Anne. "
+        "Elle me regarde avec un regard de haine, s’avance vers moi et m’attrape par le col."
+
+        got "T'as mis quoi dans le repas du con ?"
+
+        "Elle a perdu le côté innocente et triste d’il y a 20 secondes."
+
+        "Moi" "Heu, je ne sais plus. Il y avait des cacahuètes, des concombres, du poulet..."
+
+        "Avant que je ne finnissent ma phrase elle me jete au sol violemment."
+        "Je me retrouve assis par terre et Marie-Anne avance vers moi."
+        "Elle me frape le visage et commence à partir du cimetière. "
+        "Je dois la rattraper"
+
+        "Moi" "Qu’est-ce qu'il se passe !?"
+        got "Je suis allergique tête de..."
+
+        "Son visage me montre une vive douleur coupant sa phrase."
+        "Elle lève de nouveau sa main vers moi et par réflexe je ferme les yeux."
+        "Sans surprise elle me frappe."
+        "En rouvrant les yeux je la vois au loin, j’imagine que cela ne sert a rien de la rattraper."
+        "Je devrais rentrer et lui reparler une prochaine fois."
+
+
         #---si minijeu reussi---
         $flirt_got = True
 
@@ -1105,6 +1299,21 @@ label start:
         got "C’est trop bon !"
 
         "Elle me regarde avec de grands yeux comme une enfant qui découvre quelque chose de nouveau."
+
+        got "Hey je me demandais... "
+        got "Pourquoi tu as accepté de venir ce soir avec moi ?"
+        "Moi" "Je suis nouveau dans le coin et tu es l’une des premières personnes que je connais à me proposer de faire des choses en dehors de travail."
+        "Moi" "Je trouve ça cool en plus je découvre des endroits où je ne serais jamais venu sans toi."
+        got "T'as pas peur ?"
+        "Moi" "Peur de quoi ?"
+        got "Je sais pas... "
+        got "La plupart des personnes me fuient un peu... "
+        got "Dans les magasins les parents avec des enfants leurs font des réflexion sur ce qu’il ne faut pas faire après m’avoir vu ou ce genre de choses. "
+        got "J’ai plus l’habitude que les gens me fuient plutôt qu’il me suivent."
+        "Moi" "Je ne vois pas de raison de te fuir, t'es gentille avec moi et j’aime bien sortir avec toi."
+
+        "Après ma phrase je la vois rougir et comme chercher quelque chose dans le vide avec son regard."
+        "Comme pour briser le silence qui commence à s'installer, elle recommence à manger."
 
         got "Hmmmm, j’aurais jamais imaginé que tu puisses faire quelque chose d’aussi bon !"
         "Moi" "Merci, j’ai essayé de me creuser la tête pour faire quelque chose qui pourrait te plaire."
@@ -1165,25 +1374,128 @@ label start:
         jump date2_done
 
     label date2_hippie:
-        hippie "viens on date dans un cahmp"
-        # peut etre rajouter une amitie ou un truc ici nn ?
+        hippie "Super ! Je t'attendrai avec impatience !"
+
+        "Le soir venu..."
+        "Je suis bien à l'adresse que m'a donnée Jeanne, mais je ne la vois nulle part..."
+        "Je comprends pourquoi elle voulait qu'on se retrouve ici cependant, avec le coucher du soleil sur les arbres et la multitude de fleurs dans les hautes herbes, l'ambiance est presque féerique."
+
+        hippie "Coucou, je t’ai fait attendre ?"
+
+        "Jeanne arrive par derrière moi et me fait sursauter. "
+
+        hippie "C’est beau ici non ? "
+        hippie "Je n’ai jamais vu personne pourtant, donc je considère un peu cet endroit comme mon coin de paradis secret, là où la nature est laissée libre et heureuse..."
+        "Moi" "C’est vrai que c’est superbe. "
+        "Moi" "Mais il fait quasiment nuit, on devrait peut-être aller se mettre à l’abri non ?"
+        hippie "Non attends, tu vas voir, le meilleur est à venir. "
+        hippie "Tiens, allonge- toi dans l’herbe à côté de moi."
+
+        "Surpris par sa demande, je m'exécute, curieux de voir où celà allait mener."
+        "Nous restons ainsi quelques instants à profiter du coucher de soleil. "
+        "Juste au moment où je tourne la tête vers Jeanne pour lui demander ce que nous allons faire ensuite, elle pousse un cri."
+
+        hippie "Regarde, ça commence !"
+
+        "Relevant les yeux vers le ciel, je vois les étoiles de la voûte céleste s’allumer les unes après les autres. "
+        "Loin des lumières de la ville, elles sont indénombrables. C’est magnifique."
+
+        hippie "Je ne me lasse jamais de ce spectacle. "
+        hippie "Voir toutes ces lumières, toutes de tailles et d'intensité différentes danser dans la nuit, ça me donne espoir pour les humains."
+        "Moi" "Comment ça ?"
+        hippie "Tu sais que je fais partie du mouvement hippie non ? "
+        hippie "Eh bien ça n’a pas toujours été le cas. "
+        hippie "Au début, j'étais une fille totalement normale, perdue dans la masse..."
+        hippie "Mais un jour mes parents ont gagné au loto. "
+        hippie "J’étais encore innocente et crédule à l’époque, donc je me disais qu’on allait pouvoir rendre tout le monde heureux avec tout cet argent."
+        hippie "Quelle n’a pas été ma déception quand j’ai vu mes parents s’isoler peu à peu du monde, devenir aigris et proches de leurs sous. "
+        hippie "Quand ils ont refusé de donner de l’argent à un proche malade, j’en ai eu assez et je me suis enfui. "
+        hippie "J’ai rejoint le camp hippie le plus proche et je ne suis jamais revenue. "
+        hippie "Depuis, je me bat pour le bonheur, pour que tout le monde puisse être heureux. "
+        hippie "Et je me dis qu’un jour, peut-être qu’on sera aussi unis et brillants que les étoiles dans le ciel."
+
+        "C’était la première fois qu’elle s’ouvrait autant. "
+        "Elle qui est d’habitude si rayonnante, si enjouée, je la trouvais à présent mélancolique, presque triste même."
+        "Avant que je ne puisse l'interpeller, la rassurer, elle reprit la parole, tendant la main vers le ciel."
+
+        hippie "Je sais bien que c’est impossible, mais j’aimerais bien changer le monde, faire comprendre à tous que les autres sont importants, du plus grand au plus petit..."
+        "Moi" "C’est un beau rêve..."
+        hippie "Merci."
+
+        "Nous sommes restés longtemps comme ça, allongés dans l’herbe, à regarder le ciel, la main dans la main. "
+        "Le moment est trop éthéré, trop beau pour que je le brise en disant quoi que ce soit d’autre."
+        "Je ne sais pas combien de temps s’est écoulé avant que Jeanne se relève, et me tende la main pour m’aider à me relever à mon tour. "
+        "La lumière de la lune, derrière sa tête, lui fait un halo d’albâtre, entouré d’une couronne de diamants d’étoiles. "
+        "Elle est magnifique..."
+        "Mon coeur manque un battement."
+        "Je n’ai aucun souvenir de comment je suis rentré ensuite, mais quand je reprends mes esprits je suis déjà devant mon immeuble. "
+        "J’ai vraiment l’impression de sortir d’un rêve."
 
         jump date2_done
     label date2_done:
 
 
     label date3_got:
-        got "tu veux rencontrer le guitariste de the cure ????????"
-        menu:
-            "mais quelle question.. Evidemment !":
-                jump goodEnding_1
-            "c'est qui ?":
-                jump neutralEnding_1
+        "Comme d'habitude, elle ne me laisse pas de temps avant de raccrocher."
+        "Il lui aura fallu seulement une dizaine de minutes pour arriver au studio."
+
+        "Moi" "Tu as fais vite."
+        got "J’étais juste à côté."
+
+        "Vu comment elle est essoufflée, j’ai un peu de mal à y croire."
+
+        "Moi" "Maintenant que tu es la, je peux te présenter quelqu’un que, je pense, tu aimes."
+
+        "J’ouvre la porte du studio d’enregistrement et tend le bras vers le guitariste de \"The cure\" ."
+
+        # CONTINUER ICI
+        if amitie_got >= 4:
+            jump goodEnding_1
+        else:
+            jump neutralEnding_1
 
         jump date3_done
 
+
     label date3_hippie:
-        "il se passe ce qu'il se passe"
+        "Moi" "ça commence à faire beaucoup de manifestations non ?"
+        "Moi" " M’enfin, ça reste une invitation à laquelle je répondrais avec plaisir oui. A ce soir alors !"
+
+        "Le soir venu..."
+        "Après quelques minutes à attendre, je vois enfin Jeanne qui arrive. "
+        "Mais quelque chose ne va pas. Est ce qu'elle est...  Oh bon sang !"
+
+        "Moi" "Mais tu es blessée ! Est-ce que ça va ? Qu’est ce qui s’est passé ?"
+        hippie "Ne t’inquiète pas, c’est juste une petite coupure au front, c’est impressionnant parce que ça saigne beaucoup, mais ce n’est vraiment pas grave."
+        "Moi" "Mais comment tu t’es fait ça ? "
+        "Moi" "C’est la manifestation de cet après-midi ? Je pensais que c’était un truc tranquille !"
+        hippie "Ca aurait du oui, mais des chauves ont commencé à nous lancer des pavés, et j’en ai pris un sur la tête."
+        hippie "Mais ce n’est pas grave, cela en valait la peine, je sais bien que tout le monde ne nous aime pas."
+        "Moi" "Ecoute, je sais que ta cause te tient à cœur, mais tu es importante toi aussi. "
+        "Moi" "Tu ne peux pas promouvoir le bien-être animal si tu ne prends pas soin de toi !"
+        hippie "C’est gentil de ta part de t’inquiéter pour moi. Vraiment. "
+        hippie "Mais je t’assure que ça va. "
+        hippie "Ce n’est pas comme si j’allais manquer à grand monde tu sais..."
+        "Moi" "Hey ! Et moi alors ? Et ton groupe ? Et les enfants à qui tu apprends le diabolo ? "
+        "Moi" "Tu es importante toi aussi, ce n’est pas parce que la majorité pensent d’une manière différente qu’ils ont forcément raison. "
+        "Moi" "Tu le sais d’ailleurs, sinon tu ne manifesterais pas non ?"
+        "Moi" "Alors je t’en supplie, fais attention à toi d’accord ? Au moins pour moi. "
+        "Moi" "Je tiens trop à toi pour supporter de te voir te blesser."
+        hippie "Ah ce point hein ? "
+        "Moi" "J’en doutais peut-être encore un petit peu avant de te voir arriver, mais te voir dans cet état m’a fait réaliser à quel point tu comptais pour moi. "
+        "Moi" "Ce n’est pas grave si on n'est pas pareil, si on ne pense pas la même chose. "
+        "Moi" "L’important c’est qu’on fasse un effort pour se comprendre l’un l’autre, que chacun fasse un pas vers les autres pour essayer de les comprendre."
+        hippie "Sauf les nazis."
+        "Moi" "Ouais, sauf les nazis."
+
+        "Le silence s’installe un moment."
+
+        "Moi" "... On va dans ta roulotte ?"
+        hippie "... Oui."
+
+        # REECRIRE CETTE PHRASE POUR FAIRE PLUS EXPLICITE
+        "Il se passe ce qu’il se passe."
+
         jump goodEnding_2
     label date3_done:
 
@@ -1218,9 +1530,19 @@ label start:
         jump goodEnding_done
 
     label goodEnding_2:
-        hippie "festival hippie wouhou"
-        hippie "je suis enceinte bb"
+        "Le festival bat son plein. "
+        "C’est un succès retentissant, réunissant un public de tous horizons venu découvrir la culture hippie. "
+        "Le groupe \"Quatuor\" est clairement la plus grande réussite, faisant déborder la prairie dans laquelle se déroule l'événement."
+
+        "Cet événement de grande ampleur va démystifier la culture hippie à de nombreuses personnes, qui adopterons l’état d’esprit de paix et de tolérance que la culture prône. "
+        "Un nouvel âge d’or des hippies allait commencer."
+
+        "Jeanne et moi nous sommes mis en couple officiellement lors de ce festival. "
+        "Elle continue de jouer de la musique et moi de gérer différents groupes. "
+        "J’accorde cependant désormais plus de temps à ma famille, et aux causes sociales qui me semblaient juste. "
+        "Quant à Jeanne, elle continue d’aller en manifestation, mais elle ne se met plus en danger comme avant, surtout qu’un petit grumeau lui fait désormais location sous le nombril."
         jump goodEnding_done
+
 
     label goodEnding_3:
 
@@ -1253,7 +1575,50 @@ label start:
         punk "C’pas ta faute, c’est même plutôt l’inverse."
         punk "Sans cette discussion qu’on a eu, je l’aurai sûrement bien plus mal pris. "
         punk "J’aurai peut-être pas tenu le coup."
-        "Moi" "Non, ne dis pas ça."
+        "Moi" "Non, ne dis pas ça. Ce sont juste des abrutis."
+        punk "C’est vrai, mais avant c’était des abrutis qui m’adressaient la parole, maintenant c’est juste des abrutis et j’suis tout seul."
+        "Moi" "C’est pas totalement vrai, je suis la moi."
+        punk "Ouais, pour combien de temps, après le festival le groupe va surement me virer, et on s’verra plus jamais."
+
+        "Quand il prononce ces mots mon cœur se serre."
+        "C’est fou je n’avais pas réalisé que je tenais autant à lui. "
+        "Ce pourrait-il que je ne sois pas seulement attiré par les femmes ?"
+        "C’est ça, je n’avais jamais considéré que je pourrais être attiré par un homme, mais l’idée de ne plus le voir m’amène au bord des larmes."
+
+        "Moi" "Non, on se reverra. Je te le promets. Je ne te laisserai pas tomber. "
+        "Moi" "Il est hors de question qu'on les laisse gagner."
+
+        "Il me regarde puis et baisse les yeux vers la table."
+        "A ce moment je réalise que j’ai instinctivement attrapé sa main sans même m’en rendre compte."
+
+        punk "Ha... Heu... Ouais."
+
+        "Il rougit et détourne le regard."
+
+        "Moi" "Je suis on ne peut plus sérieux."
+        punk "Je sais bien, mais c’est compliqué."
+        "Moi" "Comment ça ?"
+        punk "J’ai pas envie de t’exposer aux risques qui viennent avec cette vie. "
+        punk "J’vais être honnête, j’ai déformé la vérité... "
+        punk "Le membre du groupe qui à été passé à tabac dont je t’avais parlé. "
+        punk "Bah c’était pas un membre du groupe, c’était mon mec... "
+        punk "Et il à pas juste été salement amoché, il a été battu à mort."
+
+        "Je reste silencieux à cette annonce, je ne sais trop que dire."
+
+        punk "Alors comprends-moi bien, tu m’plais bien et je suis sûr que t’es un type super. "
+        punk "Mais j’ai pas envie de te mettre en danger."
+        "Moi" "Peut-être, mais ce n’est pas à toi de prendre cette décision pour moi."
+
+        "Je me lève et l’attrapant par le col, l’embrasse passionnément. "
+        "Il me rend mon baiser. "
+
+        # fondu noir
+
+        "Patrick et moi avons continué à nous voir, discrètement, presque en secret."
+        "Malgré tout, il à continué à faire de la musique, et les membres de son groupe ont fini par venir lui présenter leurs excuses."
+        "Quant à moi, j’ai continué de travailler dans le studio."
+        # CONTINUER ICI
 
         jump goodEnding_done
 
@@ -1270,7 +1635,37 @@ label start:
 
 
     label neutralEnding_1:
-        got "festival trop bieeeennn"
+        got "Qui t'as dit que j’aimais \"The cure\" ?"
+        "Moi" "Heu, personne... "
+        "Moi" "Mais vu ton style de musique je me suis dit que c’était ce que tu aimais."
+        "Moi" "Avec le festival il passait dans le coin et j’ai déjà travaillé avec lui."
+        "Moi" "J’ai envie de te proposer de fare une collab avec lui pendant le festival !"
+        got "Dommage pour toi alors, je déteste ce groupe. "
+        got "J’adore le style de musique ca s’arrête là, il peut repartir."
+        "Moi" "Désolé j’aurais dû te prévenir avant tout ca."
+
+        "J’explique honteusement au guitariste que Marie-Anne ne peut pas faire la collab avec lui. "
+        "Il a l’air de le prendre assez mal et part sans plus tarder."
+
+        got "Vraiment réfléchis avant de faire ce genre de choses. "
+        got "Bon on la fait cette session ?"
+
+        "La session se termine, je laisse les membres du groupe partir et retient Marie-Anne."
+
+        "Moi" "Marie-Anne j’ai quelque chose à te dire."
+        got "..."
+        "Moi" "Depuis nos petites aventures, les rendez vous dans le cimetière,..."
+        "Moi" "... j’ai l’impression que l'on s’entend vraiment bien et j'aimerais savoir si tu voulais sortir avec moi ?"
+        got "[nom], t'es mignon et gentil, tu ne me juge pas, tu me rabaisse pas et je te suis reconnaissante pour tout ça."
+        got "Mais je ne veux pas que notre relation change."
+        "Moi" "Je comprends..."
+        "Moi" "On se retrouve au festival du coup..."
+        "Moi" "Salut..."
+
+        "Sans attendre une réponse je pars du studio laissant Marie-Anne derrière moi."
+
+
+
         jump neutralEnding_done
 
     label neutralEnding_2:
