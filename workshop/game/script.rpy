@@ -114,7 +114,7 @@ label start:
         "Ah oui les \"Perruquiers noirs\""
         "C’est à ce moment que l’homme qui semblait s’amuser de la dispute de tout à l'heure ouvre violemment la porte."
         "Il rentre dans la petite pièce puis me salue d’un mouvement de tête."
-        "Bonjour, enchanté de vous rencontrer, je suis le nouvel ingé-son, [nom]. J’..."
+        "Moi" "Bonjour, enchanté de vous rencontrer, je suis le nouvel ingé-son, [nom]. J’..."
         "Punk" "Ouais ouais, super super. "
         punk "Moi c'est Patrick."
         punk "Contente-toi d'enregistrer et silence. Et t’as pas intérêt à foirer."
@@ -262,7 +262,10 @@ label start:
             jump choix3_punk
 
 
-
+    label suite3:
+        # CHANGER DIALOGUES
+        "Je suis enfin chez moi."
+        "rompiche"
 
 
     # --------------------------------------------------------------------------
@@ -300,7 +303,7 @@ label start:
         "Je vais appeler \"Quatuor\" aujourd’hui.":
             $amitie_hippie += 1
 
-            if (flirt_hippie):
+            if flirt_hippie:
                 "Dans un but purement professionnel, bien sûr."
             "La session se passe extrêmement bien, le groupe à bien progressé en quelques semaines."
             "Après la session, Jeanne vient me voir."
@@ -376,7 +379,7 @@ label start:
         "Le groupe \"Effervecence\" me plait bien.":
             $amitie_got += 1
 
-            if (flirt_got):
+            if flirt_got:
                 got "Allo ? [nom] ?"
                 "Moi" "Oui, j’ai une surprise qui je pense va te plaire. "
                 "Moi" "Tu peux venir faire une session de suite ?"
@@ -401,31 +404,6 @@ label start:
 
                     "Je préfère que l'on se concentre sur le festival."
                     jump neutralEnding_2
-
-        "Patrick":
-            $amitie_punk += 1
-            punk "je ne repond pas"
-            "est-ce que je vais le chercher ?"
-            menu:
-                "oui":
-                    jump goodEnding_3
-                "non":
-                    if (amitie_got <= 4 or amitie_hippie <= 4):
-                        jump goodEnding_3
-
-                    else:
-                        "on va tous le chercher"
-                        "discussion sur l'acceptation de soi et les differences"
-                        if (flirt_got and flirt_hippie and flirt_punk):
-                            jump goodEnding_4
-                        else:
-                            jump goodEnding_5
-
-
-
-
-
-
 
 
 
@@ -535,7 +513,7 @@ label start:
         "Nous continuons à discuter jusqu'à ce que, en effet, les autres membres de chaque groupe arrivent."
         "J'ai également appris que le quatrième groupe qui devait venir ne viendrait en fait que demain, seul."
         "Un peu déçu de ne pas les voir, je me concentre tout de même sur les trois qui se trouvent en face de moi."
-        "\"Quatuor\" et \Effervecence\" passent l'un après l'autre pour me montrer quelques titres qu'ils produisent chaque semaine dans des bars."
+        "\"Quatuor\" et \"Effervecence\" passent l'un après l'autre pour me montrer quelques titres qu'ils produisent chaque semaine dans des bars."
         "Les deux groupes sont uniques et ont leur patte qui les diffèrent de l'autres."
 
 
@@ -710,7 +688,6 @@ label start:
                 "Moi" "C'est gentil d'avoir proposé ceci dit"
                 got "Boh pas grave ! Une prochaine fois."
 
-                "fin de journee retour chez lui"
         jump choix3_done
 
 
@@ -748,11 +725,11 @@ label start:
             "Moi" "Hey, merci ! Ça fait toujours plaisir de venir ici."
             hippie "On joue de mieux en mieux, le festival n’a qu’à bien se tenir !"
 
-        else : # si c'est la premiere fois que l'event diabolo arrive
+        else :
             "Moi" "La séance est terminée, merci à vous !"
             hippie "Hey, merci à toi, ça fait plaisir de se voir de temps en temps. "
-            hippie "D’ailleurs, ce soir on organise un petit atelier de découverte des arts du cirque, ça te tente de venir ? "
-            hippie "Je pourrais t’apprendre à jongler."
+        hippie "D’ailleurs, ce soir on organise un petit atelier de découverte des arts du cirque, ça te tente de venir ? "
+        hippie "Je pourrais t’apprendre à jongler."
 
         menu:
             "Oui, pourquoi pas !":
@@ -774,7 +751,7 @@ label start:
         "blablabla"
         #ne pas oublier d'ecrire ici"
 
-        if (amitie_punk >= 2):
+        if amitie_punk >= 2:
             punk "Hey [nom], tu trouvais l’autre trou pas trop mal, j’t’attends à la sortie, j’vais te montrer un vrai bar."
             "C’est presque menaçant comme invitation, je me demande si je devrais avoir peur."
 
@@ -868,7 +845,7 @@ label start:
             "Moi" "Merci."
 
             "Je regarde Patrick enfiler son verre cul-sec"
-            if $boitBiere:
+            if boitBiere:
                 punk "Alors ? Je t’attends là en fait."
 
                 "Je crois qu'il veut que je cul-sec aussi..."
@@ -878,7 +855,7 @@ label start:
                         punk "Allez viens avec moi on va faire un tour et j’te raccompagne chez toi."
 
                     "Je préfere en rester la...":
-                        punk "Je t'imaginais plus olé olé"
+                        punk "Je t'imaginais un peu plus dévergondé."
 
 
             "En passant à côté d’une ruelle sombre, deux skinhead nous alpaguent."
@@ -889,7 +866,7 @@ label start:
 
             "OULA ! Patrick frappe un des deux skinhead."
 
-            if $nbBieres == 3:
+            if nbBieres == 3:
                 jump bagarre
 
             else:
@@ -908,6 +885,7 @@ label start:
 
 
     label choix3_done:
+        jump suite3
 
     label bagarre:
         #MINI JEU BAGARRE
@@ -938,7 +916,9 @@ label start:
         "Tandis que je regarde Patrick s'éloigner, je décide qu'il est temps pour moi de rentrer également."
 
         jump bagarre_done
+
     label bagarre_done:
+        jump suite3
 
 
 
@@ -946,7 +926,7 @@ label start:
     # --------------------------------------------------------------------------
     # Choix 4 : Choix session studio
     label choix4_got:
-        if (amitie_got >= 5):
+        if amitie_got >= 5:
             got "Allô ?"
             "Moi" "Bonjour c’est [nom], je t’appelle pour savoir si tu avais envie de refaire une session aujourd’hui ?"
             if $choix3_cimetiere:
@@ -1023,6 +1003,7 @@ label start:
 
 
     label choix4_done:
+        jump suite4
 
 
 
@@ -1083,6 +1064,7 @@ label start:
         "Marie-Anne se remet à courir et disparaît dans le fond du cimetière me laissant seul dans cet endroit lugubre."
         "Je n'ai plus qu'à rentrer maintenant j'imagine..."
 
+        jump suite3
         jump date1_done
 
 
@@ -1241,6 +1223,50 @@ label start:
 
 
             "Allez je les appelle.":
+                "J’ai appelé les autres groupes et leur ai expliqué que Patrick ne répondait pas et que je m’inquiétais pour lui. "
+                "Jeanne et Marie-Anne ont accepté de m’aider à le chercher."
+                "Après s’être séparés et avoir cherché dans les coins de la ville où je savais qu’il avait l’habitude d’aller, nous nous sommes retrouvés devant chez lui."
+                #toc toc
+                "Faites qu’il ouvre."
+                # il ouvre la porte
+                "Dieu soit loué il va bien, même s’il n’a pas l’air dans son assiette."
+
+                "Moi" "Dieu merci tu vas bien, je m’inquiétais pour toi on t’a cherché partout."
+                punk "Ouais... Désolé..."
+                got "Ça va pas de disparaître comme ça ?"
+                punk "J’ai dit, désolé. "
+                punk "Et pis qu’est-ce que vous faites là ?"
+                hippie "On est venu prêter main forte à [nom]."
+                hippie "Il se faisait un sang d’encre pour toi et par extension nous aussi."
+                "Moi" "Qu’est-ce qu’il t’arrive ?"
+                punk "Restez pas plantés là, entrez. "
+
+                "Après être entrés, nous nous sommes installés dans son salon."
+                "Nous sommes restés silencieux un bon moment, la tension dans l’air presque palpable."
+                "Après un moment, j'ose enfin briser l’assourdissant silence qui était tombé sur la pièce."
+
+                "Moi" "Dis nous tout. Qu’est-ce qu’il se passe ?"
+                punk "Bah c’est vraiment très simple, tu te souviens de l’autre soir, quand je t’ai parlé de mon secret ?"
+                "Moi" "Oui, comme si c’était hier."
+                got "Comment ça ?"
+                hippie "Quel secret ?"
+                "Moi" "Ce n'est pas…"
+                punk "Pas vos oignons."
+                hippie "Si on savait de quoi tu parles on pourrait plus facilement t’aider."
+                got "Pour un fois elle n'a pas tort."
+                "Moi" "Laissez le, s'il n’a pas envie d’en parler, c’est son droit."
+                punk "C’est bon, c’est pas grave, elles finiront pas l’apprendre dans tous les cas."
+                punk "Je préfère les hommes..."
+                punk "... et les skinheads de l’autre fois nous ont entendus en parler dans la rue l’autre soir."
+                punk "Ils ont répandu la nouvelle en ville."
+                punk "Plus personne veut me parler, même pas les autres membres de mon groupe."
+                punk "Les seuls coups de fil que j’ai reçus aujourd’hui ça à été pour m’insulter."
+                punk "Alors ouais, j’ai pas décroché."
+
+                "Le silence s'abat de nouveau sur la pièce."
+                "Alors que Jeanne et Marie-Anne sont bouche bée, je sens mon cœur se serrer dans ma poitrine."
+                "Je n’avais jamais envisagé avoir des sentiments envers un autre homme et pourtant à cet instant rien ne m’importe plus que lui."
+
                 if $flirt_got and $flirt_hippie:
                     jump goodEnding_4
                 else:
@@ -1730,32 +1756,129 @@ label start:
 
 
     label goodEnding_4:
-        "J’ai appelé les autres groupes et leur ai expliqué que Patrick ne répondait pas et que je m’inquiétais pour lui. "
-        "Jeanne et Marie-Anne ont accepté de m’aider à le chercher."
-        "Après s’être séparés et avoir cherché dans les coins de la ville où je savais qu’il avait l’habitude d’aller, nous nous sommes retrouvés devant chez lui."
-        #toc toc
-        "Faites qu’il ouvre."
-        # il ouvre la porte
-        "Dieu soit loué il va bien, même s’il n’a pas l’air dans son assiette."
 
-        "Moi" "Dieu merci tu vas bien, je m’inquiétais pour toi on t’a cherché partout."
-        punk "Ouais... Désolé..."
-        got "Ça va pas de disparaître comme ça ?"
-        punk "J’ai dit, désolé. "
-        punk "Et pis qu’est-ce que vous faites là ?"
-        hippie "On est venu prêter main forte à [nom]."
-        hippie "Il se faisait un sang d’encre pour toi et par extension nous aussi."
-        "Moi" "Qu’est-ce qu’il t’arrive ?"
-        punk "Entrez. "
+        "En fait rien ne m’importe plus qu’eux. Tous les trois."
+        "Est-ce que je suis tombé amoureux de trois personnes d’un coup ?"
+        "Mon introspection se retrouve soudainement interrompue."
 
+        got "On les emmerde ces fachos, moi j’en ai rien a faire. "
+        hippie "Entièrement d’accord avec elle."
+        "Moi" "Je suis avec elles la dessus."
+        "Moi" "Si ça leur suffit pour couper les ponts avec toi, ce sont des abrutis qui ne méritaient pas de rester dans ta vie."
+        punk "Peut-être, mais avant c’était des abrutis qui m’adressaient la parole."
+        punk "Maintenant c’est juste des abrutis et j’suis tout seul."
+        got "Comment ça tout seul ? Il est vide ton salon là ?"
+        hippie "On compte pour du beurre nous ?"
+        "Moi" "Elles ont raison, nous on est là !"
+        punk "Ouais, pour combien de temps."
+        punk "Après le festival le groupe va surement me virer, et on s’verra plus jamais."
 
+        "Quand il prononce ces mots mon cœur se serre, c’est fou je n’avais pas réalisé que je tenais autant à lui."
+        "Et d’un simple coup d'œil autour de moi je remarque que les autres semblent peinées elles aussi."
 
+        "Moi" "Non. On se reverra, c’est une promesse."
+        "Moi" "Je ferai tout ce que je peux pour continuer à te voir."
+        got "Bah dis donc, tu n’y vas pas de main morte toi."
+        hippie "Shhhh, je crois que ça ressemble à une déclaration ça. "
+
+        "Mes joues prennent instantanément une teinte pourpre."
+
+        "Moi" "Je... Heu... Non..."
+
+        "Apparemment je ne suis pas le seul à être devenu complètement rouge."
+
+        punk "Ha... Heu... Ouais... Non..."
+        got "Hahaha! Regardez vous rougir comme des gamins, vous êtes au collège ou quoi ?"
+        "Moi" "Tu ne manques pas d’air, tu n’en menais pas large non plus l’autre soir au cimetière."
+
+        "Oups, la boulette je crois que je l’ai mise en rogne."
+        "Enfin, au moins elle est tout aussi embarrassée que moi."
+
+        hippie "Qu’est-ce que ça veut dire ça ?"
+        got "RIEN!"
+        punk "Attends, vous êtes en train de me dire que tu sortais avec nous trois en même temps [nom] ?"
+        "Moi" "Alors, je peux tout expliquer."
+        got "Ouais."
+        hippie "Hmmmm."
+        punk "On aimerait bien."
+        "Moi" "Pour faire court, au début je voulais juste rencontrer des gens, dans une nouvelle ville. "
+        "Moi" "Mais en apprenant à vous connaître, je suis tombé amoureux de vous trois, indépendamment."
+        "Moi" "J’aurai surement dû vous en parler plus tôt pour éviter cette situation, mais je n’ai pas pu m’y résoudre."
+        punk "J’avoue que t’as plutôt merdé."
+        got "Ouais grave."
+
+        "Je suis écarlate à ce moment, quel idiot j’ai été."
+        "Aucun d’entre eux ne va plus jamais m’adresser la parole."
+
+        hippie "Calmez vous un peu, le cœur à ses raisons que la raison ignore, moi je comprends."
+        hippie "Et si vous y êtes ouverts, on pourrait tous être avec lui, rien ne nous empêche de le voir tous en parallèle."
+        punk "De toute façon c’est pas comme si on pouvait être ensemble en public. J’suis pas contre."
+        got "Après tout pourquoi pas, après tout les gens nous regardent déjà tous bizarrement, on est pas à ça près."
+
+        "Pour que Patrick puisse participer au festival, Jeanne et Marie-Anne ont proposé de l’accompagner sur scène à la place de son groupe."
+        "Au final même si leurs méthodes étaient différentes leurs messages restaient très similaires."
+        "Il s’agissait principalement de vivre sa vie et de laisser les autres vivre la leur."
+        "Après le festival, j’ai continué à les voir, tous, je ne réalise toujours pas à quel point je suis chanceux d’être tombé sur ces gens."
+        "Ils me rendent vraiment heureux."
 
         jump goodEnding_done
 
     label goodEnding_5:
-        "festival avec tous les groupes trop bien !!!"
+
+        got "On les emmerde ces fachos, moi j’en ai rien a faire. "
+        hippie "Entièrement d’accord avec elle."
+        "Moi" "Je suis avec elles la dessus."
+        "Moi" "Si ça leur suffit pour couper les ponts avec toi, ce sont des abrutis qui ne méritaient pas de rester dans ta vie."
+        punk "Peut-être, mais avant c’était des abrutis qui m’adressaient la parole."
+        punk "Maintenant c’est juste des abrutis et j’suis tout seul."
+        got "Comment ça tout seul ? Il est vide ton salon là ?"
+        hippie "On compte pour du beurre nous ?"
+        "Moi" "Elles ont raison, nous on est là !"
+        punk "Ouais, pour combien de temps."
+        punk "Après le festival le groupe va surement me virer, et on s’verra plus jamais."
+
+        "Quand il prononce ces mots mon cœur se serre, c’est fou je n’avais pas réalisé que je tenais autant à lui."
+
+        "Moi" "Non. On se reverra, c’est une promesse."
+        "Moi" "Je ferai tout ce que je peux pour continuer à te voir."
+        got "Bah dis donc, tu n’y vas pas de main morte toi."
+        hippie "Shhhh, je crois que ça ressemble à une déclaration ça. "
+
+        "Mes joues prennent instantanément une teinte pourpre."
+
+        "Moi" "Je... Heu... Ouais... Peut-être."
+
+        "Patrick est tout aussi rouge que moi."
+
+        punk "Ha... Ha... Ouais... Hahaha..."
+        "Moi" "Je suis on ne peut plus sérieux."
+        punk "Je sais bien, mais c’est compliqué."
+        "Moi" "Comment ça ?"
+        punk "J’ai pas envie de t’exposer aux risques qui viennent avec cette vie."
+        punk "J’vais être honnête, j’ai déformé la vérité."
+        punk "Le membre du groupe qui à été passé à tabac dont je t’avais parlé. Bah c’était pas un membre du groupe, c’était mon mec."
+        punk "Et il à pas juste été salement amoché, il a été battu à mort."
+
+        "Je reste silencieux à cette annonce, je ne sais trop que dire."
+
+        punk "Alors comprends-moi bien, tu m’plais bien et je suis sûr que t’es un type super."
+        punk "Mais j’ai pas envie de te mettre en danger."
+        "Moi" "Peut-être, mais ce n’est pas à toi de prendre cette décision pour moi."
+
+        "Je me lève et l’attrapant par le col, l’embrasse passionnément."
+        "Il me rend mon baiser."
+        "Les filles restent silencieuses et détournent le regard pour ne pas nous gêner mais je m’en fous."
+        "Rien n'entachera ce moment."
+
+        "Pour que Patrick puisse participer au festival, Jeanne et Marie-Anne ont proposé de l’accompagner sur scène à la place de son groupe."
+        "Au final même si leurs méthodes étaient différentes leurs messages restaient très similaires."
+        "Il s’agissait principalement de vivre sa vie et de laisser les autres vivre la leur."
+        "Après le festival, Patrick et moi avons continué à vivre notre relation discrètement pour éviter les attaques et l’homophobie."
+        "Mais nous avons milité dès que possible pour la libération des orientations sexuelles."
+
         jump goodEnding_done
+
+
     label goodEnding_done:
         jump end
 
@@ -1806,6 +1929,9 @@ label start:
 label end:
     "MERCI D'AVOIR JOUE A \"DE L'AMOUR ENTRE LES NOTES\" !"
 
+
+
+    $renpy.pause()
 
 
     return
