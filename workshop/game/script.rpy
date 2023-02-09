@@ -5,18 +5,6 @@
 
 # ----- Scenes -----
 
-#image bg cimetiere1 = bg_cimetiere_jour.jpg
-#image bg cimetiere2 = bg_cimetiere2_jour.jpg
-#image bg cimetiere3 = bg_cimetiere3_jour.jpg
-#image bg cimetiere4 = bg_cimetiere4_jour.jpg
-#image bg cimetiere5 = bg_cimetiere5_jour.jpg
-#image bg crypte = bg_crypte_jour.jpg
-
-#image bg plaine1 = bg_plaine_jour.jpg
-#image bg plaine2 = bg_plaine2_jour.jpg
-#image bg plaine3 = bg_plaine3_jour.jpg
-#image bg plaine4 = bg_plaine4_jour.jpg
-#image bg plaine5 = bg_plaine5_jour.jpg
 
 # ----- Personnages -----
 
@@ -71,7 +59,7 @@ label start:
     $jour += 1
 
     # afficher interieur studio
-    "Tu t'appelles [nom]"
+    "Tu t'appelles [nom]."
 
     "(Téléphone sonne)"
     "(Décroche le téléphone)"
@@ -109,9 +97,10 @@ label start:
 
 
     label suite1:
+        "Les membres des deux groupent partent ensuite se reposer après m'avoir demandé de les appeler rapidement pour reprendre les répetitions."
         "Bon, maintenant qu’elles sont parties, je vais pouvoir m’y mettre. "
         "Qui est-ce que j’enregistre aujourd’hui déjà ?"
-        "Ah oui les \"Perruquiers noirs\""
+        "Ah oui les \"Perruquiers noirs\"."
         "C’est à ce moment que l’homme qui semblait s’amuser de la dispute de tout à l'heure ouvre violemment la porte."
         "Il rentre dans la petite pièce puis me salue d’un mouvement de tête."
         "Moi" "Bonjour, enchanté de vous rencontrer, je suis le nouvel ingé-son, [nom]. J’..."
@@ -130,14 +119,15 @@ label start:
 
         menu:
             "Visiter un parc":
-                $nbRejets_hippie += 1
+                $amitie_got += 1
                 jump choix2_got
 
             "Partir faire des courses":
+                $amitie_hippie += 1
                 jump choix2_hippie
 
             "Aller boire un verre au bar":
-                $nbRejets_hippie += 1
+                $amitie_punk += 1
                 jump choix2_punk
 
         jump suite1_done
@@ -251,14 +241,15 @@ label start:
     # Decision session studio de la journée
     menu:
         "Je vais appeler le groupe \"Effervecence\".":
-            $nbRejets_hippie += 1
+            $amitie_got += 1
             jump choix3_got
 
         "Le groupe \"Quatuor\" m'avait bien plus hier.":
+            $amitie_hippie += 1
             jump choix3_hippie
 
         "J'ai envie de voir ce que peut donner le groupe de \"Perruquiers noirs\" aujourd'hui.":
-            $nbRejets_hippie += 1
+            $amitie_punk += 1
             jump choix3_punk
 
 
@@ -294,7 +285,6 @@ label start:
     menu:
         "\"Effervecence\" me fait de l'oeil.":
             $amitie_got += 1
-            $nbRejets_hippie += 1
 
             jump choix4_got
 
@@ -333,6 +323,7 @@ label start:
                     hippie "Je suis désolée."
 
                     "Jeanne part en courant avant que je puisse l'arrêter."
+                    #CHANGER ICI
                     if (nbRejets_hippie >= 4):
                         hippie "jai fait une overdose bg"
                         #changer dialogues ici
@@ -340,7 +331,6 @@ label start:
 
 
         "Je préfererai enregistrer avec les \"Perruquiers noirs\".":
-            $nbRejets_hippie += 1
             $amitie_punk += 1
 
             if (amitie_punk >= 4):
@@ -508,13 +498,13 @@ label start:
         hippie "C'est un plaisir de vous rencontrer"
         got "Ouais, désolée. Je m'appelle Marie-Anne et suis la guitariste de mon groupe \"Effervecence\"."
 
-        "L'homme qui observait la dispute se leve sort par la porte qui mène à l'arrière du studio."
+        "L'homme qui observait la dispute se lève sort par la porte qui mène à l'arrière du studio."
 
         "Nous continuons à discuter jusqu'à ce que, en effet, les autres membres de chaque groupe arrivent."
         "J'ai également appris que le quatrième groupe qui devait venir ne viendrait en fait que demain, seul."
         "Un peu déçu de ne pas les voir, je me concentre tout de même sur les trois qui se trouvent en face de moi."
         "\"Quatuor\" et \"Effervecence\" passent l'un après l'autre pour me montrer quelques titres qu'ils produisent chaque semaine dans des bars."
-        "Les deux groupes sont uniques et ont leur patte qui les diffèrent de l'autres."
+        "Les deux groupes sont uniques et ont leur patte qui les diffèrent de l'autre."
 
 
         jump choix1_done
@@ -540,14 +530,12 @@ label start:
     # --------------------------------------------------------------------------
     # Choix 2 : Premiere balade du soir
     label choix2_got:
-        $amitie_got += 1
         $choix2_balade = True
 
         # ECRIRE ICI
         jump choix2_done
 
     label choix2_hippie:
-        $amitie_hippie += 1
         $choix2_magasin = True
 
         "Après avoir un petit peu tourné dans les rues autour de chez moi, j’ai trouvé une supérette, mais il semble y avoir un attroupement devant."
@@ -608,7 +596,6 @@ label start:
         jump choix2_done
 
     label choix2_punk:
-        $amitie_punk += 1
         $choix2_bar = True
 
         "J’irais bien faire un tour au bar ce soir, ça pourrait m’aider à rencontrer du monde et à me familiariser avec la ville."
@@ -641,7 +628,7 @@ label start:
 
         "Moi " "C’est pas vraiment moral."
         punk "Rien à carrer. "
-        punk "Écoute, c’est pas que j’apprécie pas cette discussion, mais c’est bientôt l’heure ou ces tocards de droitards sortent de la fac"
+        punk "Écoute, c’est pas que j’apprécie pas cette discussion, mais c’est bientôt l’heure ou ces tocards de droitards sortent de la fac."
         punk "J’ai bien envie de leur mettre un coup de pression."
 
         "Patrick se lève et s'en va, me laissant seul face à ma bière."
@@ -657,7 +644,6 @@ label start:
     # --------------------------------------------------------------------------
     # Choix 3 : Choix session studio
     label choix3_got:
-        $amitie_got += 1
         $choix3_cimetiere = True
 
         "Allez, je compose le numéro du groupe de gothique."
@@ -695,44 +681,29 @@ label start:
 
     label choix3_hippie:
         $choix3_diabolo = True
-        $amitie_hippie += 1
 
 
         "Je vais appeler \"Quatuor\" aujourd’hui."
         "Je prends mon téléphone et compose le numéro de leur meneuse, Jeanne."
         "Moi" "Bonjour, c’est à votre tour de passer pour la session d’enregistrement."
-
-        if amitie_hippie >= 1:
-            hippie "Super ! On arrive, merci beaucoup !"
-            "Moi" "Hey, merci à toi ! A tout de suite !"
-            hippie "Hihi, tu veux tant que ça me revoir ? "
-            #continuer
-        else:
-            hippie "Oh d’accord. Merci."
+        hippie "Super ! On arrive, merci beaucoup !"
+        "Moi" "Hey, merci à toi ! A tout de suite !"
+        hippie "Hihi, tu veux tant que ça me revoir ? "
 
         "Le groupe \"Quatuor\" passe la journée au studio et s’améliore beaucoup !"
 
-        $amitie_hippie += 1
-        "---Vous devenez plus ami avec Jeanne !---"
-
         "Moi" "La séance est terminée, merci beaucoup."
         hippie "Beau travail aujourd’hui !"
-
-        if amitie_hippie < 2:
-            # REVOIR AVEC BASTIEN ICI
-            "Moi" "Merci pour l’occasion, on en avait vraiment besoin…"
-            hippie "Merci à toi, c’était sympa !"
-            "Moi" "Hey, merci ! Ça fait toujours plaisir de venir ici."
-            hippie "On joue de mieux en mieux, le festival n’a qu’à bien se tenir !"
-
-        else :
-            "Moi" "La séance est terminée, merci à vous !"
-            hippie "Hey, merci à toi, ça fait plaisir de se voir de temps en temps. "
+        "Moi" "Merci pour l’occasion, on en avait vraiment besoin…"
+        hippie "Merci à toi, c’était sympa !"
+        "Moi" "Hey, merci ! Ça fait toujours plaisir de venir ici."
+        hippie "On joue de mieux en mieux, le festival n’a qu’à bien se tenir !"
         hippie "D’ailleurs, ce soir on organise un petit atelier de découverte des arts du cirque, ça te tente de venir ? "
         hippie "Je pourrais t’apprendre à jongler."
 
         menu:
             "Oui, pourquoi pas !":
+                $amitie_hippie += 1
                 jump date1_hippie
 
             "Non, désolé...":
@@ -744,7 +715,6 @@ label start:
 
 
     label choix3_punk:
-        $amitie_punk += 1
         $choix3_bagarre = True
 
         "J'appelle un des membres du groupe et leur demande de venir."
@@ -761,12 +731,11 @@ label start:
                 "Je vais sortir par devant, je ne pense pas qu’il soit dangereux.":
                     "..."
 
+            # Dans tous les cas, Patrick se trouve devant la porte
             punk "C’est pas trop tôt, tu traines la patte dis donc !"
             "Moi" "Désolé, je devais fermer le studio."
             punk "Ouais ouais, dépêche toi."
             "Moi" "J’arrive."
-
-            # emmene dans un autre bar
 
             punk "Voilà ça c’est un super bar tu vas voir."
             punk "Allez viens on va se prendre quelques bières."
@@ -777,11 +746,14 @@ label start:
             menu:
                 "Je vais prendre comme toi":
                     $nbBieres += 1
+                    $amitie_punk +=1
 
-                "Je vais prendre un Coca":
+                "Je vais prendre une limonade.":
                     punk "Ah ouais."
+                    $amitie_punk -= 1
 
             punk "Voilà, on est mieux ici. Moins de monde qu’à l’intérieur."
+            punk "Tiens, ton verre."
             "Moi" "Je suis surpris, je croyais qu’en tant que musicien tu apprécierait plus les foules."
             punk "C’est pas les foules le problème, c’est les gens."
             punk "J’sais pas si t’as remarqué mais j’ai pas la dégaine classique par ici. "
@@ -794,9 +766,11 @@ label start:
             menu:
                 "Je prends la même bière que toi":
                     $nbBieres += 1
+                    $amitie_punk +=1
 
                 "Je vais prendre un cocktail sans alcool":
                     punk "Vraiment ?"
+                    $amitie_punk -= 1
 
             punk "Voilà ton verre."
             "Moi" "Merci. "
@@ -837,6 +811,7 @@ label start:
                 "Encore une bière s'il te plait":
                     $boitBiere = True
                     $nbBieres += 1
+                    $amitie_punk +=1
 
                 "Je vais boir de l'eau pour cette fois":
                     punk "T'es nul."
@@ -881,6 +856,10 @@ label start:
                         "J’ai réussi à leur échapper."
                         "J’espère que Patrick aussi... "
 
+        else:
+            punk "Beau travail aujourd'hui."
+            punk "A demain peut-être."
+
         jump choix3_done
 
 
@@ -911,7 +890,7 @@ label start:
         punk "Tu l’as dit bouffi. Allez, à la prochaine [nom]."
 
         "--- Votre amitié avec Patrick augmente ---"
-        $amitie_punk += 1
+        $amitie_punk += 2
 
         "Tandis que je regarde Patrick s'éloigner, je décide qu'il est temps pour moi de rentrer également."
 
@@ -995,6 +974,7 @@ label start:
 
 
             "(J’ai trop peur de me faire démolir. Je n’y vais pas.)":
+                $amitie_punk -= 3
                 "Moi" "Ce sera sans moi haha..."
                 punk "Mauviette ! "
                 punk "Allez dégage, j’y vais moi !"
@@ -1012,7 +992,7 @@ label start:
     # Date 1 :
     label date1_got:
 
-        $amitie_got += 1
+        $amitie_got += 2
         $flirt_got = True
 
         "Après un bon moment à les suivre, nous arrivons devant une grande grille."
@@ -1043,6 +1023,7 @@ label start:
         got "Les flics ! Cours !"
 
         # ----- Mini jeu course poursuite -----
+        # SI REUSSITE
         $amitie_got += 1
 
         #scene bg cimetiere3
@@ -1062,6 +1043,13 @@ label start:
         got "Allez il faut que je retrouve les autres. C'etait sympa à plus."
 
         "Marie-Anne se remet à courir et disparaît dans le fond du cimetière me laissant seul dans cet endroit lugubre."
+        "Je n'ai plus qu'à rentrer maintenant j'imagine..."
+
+        # SI ECHEC
+        "J'ai perdu les membres du groupe et j'ai l'impression que je suis le seul à être poursuivi."
+        "Après avoir courru à en perdre haleine pendant plusieurs minutes, je me retrouve devant la grille du cimetière."
+        "J'ai du mal à passer au dessus mais finit par y arriver."
+        "Je n'aime pas être seul, en pleine nuit, dans cet endroit lugubre."
         "Je n'ai plus qu'à rentrer maintenant j'imagine..."
 
         jump suite3
