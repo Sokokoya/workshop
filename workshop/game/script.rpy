@@ -1553,13 +1553,18 @@ label start:
 
         "Le silence s’installe un moment."
 
-        "Moi" "... On va dans ta roulotte ?"
-        hippie "... Oui."
+        menu:
+            "On va dans ta roulotte ?":
+                hippie "... Oui."
 
-        # REECRIRE CETTE PHRASE POUR FAIRE PLUS EXPLICITE
-        "Il se passe ce qu’il se passe."
+                "Il se passe ce qu’il se passe."
 
-        jump goodEnding_2
+                jump goodEnding_2
+
+            "On va faire du repérage pour le festival ?":
+                hippie "... Oui."
+
+                jump neutralEnding_2
     label date3_done:
 
 
@@ -1909,6 +1914,9 @@ label start:
         jump neutralEnding_done
 
     label neutralEnding_2:
+        # scene festivale
+        "Nous arrivons ensemble sur la plaine où va se dérouler le festival."
+        "Quelques régisseurs sont en train de monter la scène sur laquelle \"Quatuor\" va se produire dans maintenant quelques heures."
         hippie "festival trop bieeeennn"
         jump neutralEnding_done
     label neutralEnding_done:
