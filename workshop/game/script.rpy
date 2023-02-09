@@ -63,6 +63,7 @@ label start:
     $nbRejets_hippie = 0
     $jour = 0
     $nbBieres = 0
+    $pasInterrompre = False
 
 
     # --------------------------------------------------------------------------
@@ -484,7 +485,7 @@ label start:
     # --------------------------------------------------------------------------
     # Choix 1 : Interrompre les deux femmes ou non
     label choix1_oui:
-        if $pasInterrompre:
+        if pasInterrompre:
             $interrompre = False
         else:
             $interrompre = True
@@ -664,21 +665,20 @@ label start:
         "Au moins ils ont l'air motivés."
 
         "La séance se passe sans réel problème."
-        "Le temps de m'accommoder à mes nouveaux outils, on a perdu un peu de temps, ce qui n'a pa eu l'air de gêner le groupe."
-        "Quelques heures se sont passées et je crois qu'on arrive à la fin de notre première session d'enregistrement."
+        "Le temps de m'accommoder à mes nouveaux outils, on a perdu un peu de temps, ce qui n'a pas eu l'air de gêner le groupe."
+        "Quelques heures ont passé et je crois qu'on arrive à la fin de notre première session d'enregistrement."
 
-        if (amitie_got == 2):
-            got "Hé le bleu bite ! Ca te dirait de venir à notre petite soirée ?"
-            menu:
-                "Ouais pourquoi pas.":
-                    got "Allez suis nous on y va !"
-                    jump date1_got
+        got "Hé le bleu bite ! Ca te dirait de venir à notre petite soirée ?"
+        menu:
+            "Ouais pourquoi pas.":
+                got "Allez suis nous on y va !"
+                jump date1_got
 
-                "Je comptais rentrer, je n'ai toujours pas fini de m'installer.":
-                    "Moi" "C'est gentil d'avoir proposé ceci dit"
-                    got "Boh pas grave ! Une prochaine fois."
+            "Je comptais rentrer, je n'ai toujours pas fini de m'installer.":
+                "Moi" "C'est gentil d'avoir proposé ceci dit"
+                got "Boh pas grave ! Une prochaine fois."
 
-                    "fin de journee retour chez lui"
+                "fin de journee retour chez lui"
         jump choix3_done
 
 
@@ -1201,7 +1201,10 @@ label start:
 
 
             "Allez je les appelle.":
-                jump goodEnding_4
+                if $flirt_got and $flirt_hippie:
+                    jump goodEnding_4
+                else:
+                    jump goodEnding_5
 
 
 
@@ -1448,6 +1451,12 @@ label start:
 
         "J’ouvre la porte du studio d’enregistrement et tend le bras vers le guitariste de \"The cure\" ."
 
+        got "Qui t'as dit que j’aimais \"The cure\" ?"
+        "Moi" "Heu, personne... "
+        "Moi" "Mais vu ton style de musique je me suis dit que c’était ce que tu aimais."
+        "Moi" "Avec le festival il passait dans le coin et j’ai déjà travaillé avec lui."
+        "Moi" "J’ai envie de te proposer de fare une collab avec lui pendant le festival !"
+
         # CONTINUER ICI
         if amitie_got >= 4:
             jump goodEnding_1
@@ -1522,11 +1531,68 @@ label start:
         punk "je meurs"
         jump badEnding_done
     label badEnding_done:
+        jump end
 
 
 
     label goodEnding_1:
-        got "festival gothique wouhou"
+        got "Tu te fous de ma gueule ?"
+        got "C’est le vrai ?"
+        # changer ici la phrase est bizarre ptdr
+        "Guitariste" "Je suis le guitariste de \"The cure\"."
+        "Moi" "Nan c’est une statue."
+        got "Comment t'as fait pour le faire venir ?"
+        "Moi" "J’ai déjà travaillé avec lui, et je lui ai demandé si il pouvait venir jouer pour\"Effervecence\" lors du festival de ce soir."
+        got "Attend, attend..."
+        got "Je vais jouer avec LUI ?!"
+        "Moi" "Ouais c’est pas une blague."
+        "Moi" "Vas-y, vous n’avez pas tant de temps que ca pour répéter."
+        "Moi" "Profites-en !"
+
+        "Son regard brille de mille feu."
+        "Elle me lance un regard enivrant avant de disparaître dans la salle de répétition."
+        "Après plusieurs heures de répétition intensive, je les arrête avant qu’ils ne s’écroulent de fatigue."
+
+        "Moi" "Hey ! Allez vous reposer pour ce soir !"
+
+        "Le guitariste et le reste du groupe rangent leurs affaires avant de partir se reposer."
+        "J’entre dans la salle de répétition pour ranger ce qu’ils ont laissé derrière eux."
+        "Après quelques pas dans la salle, j’entends la porte se claquer derrière moi."
+        "Marie-Anne, adossée à la porte me regarde."
+        "Son visage est empourpré, mais je ne crois pas que ce soit de la gêne."
+
+        got "Tu sais que ça fait un moment que j’attend ça ? "
+        got "Et là aujourd’hui tu m'as fait comprendre que je ne voulais plus attendre plus longtemps."
+        "Moi" "Je crois que je sais ce dont tu vas parler."
+        "Moi" "Est-cce que je peux te demander quelque chose avant ?"
+
+        "Marie-Anne s’approche de moi doucement sans rien dire."
+        "Elle met sa main sur mon torse, me pousse sur les fauteuils de la salle et s’assoie sur moi, puis approche sa bouche de mon oreille."
+        "Je n'arrive plus à sortir ne serait-ce qu'un seul mot..."
+
+        got "Tu devrais te dépêcher de parler."
+
+        "A l’entente de cette phrase je reprends mes esprits."
+        "J'attrape ses épaules, puis fais reculer son buste avant d’attraper son visage d’une main."
+        "De mon bras libre j'entoure ses hanches et l’embrasse."
+        "En me reculant pour la regarder je vois son visage complètement rouge."
+
+        "Moi" "Ce n’est pas ce que tu voulais ?"
+        got "Ta gueule ! "
+        got "Je ne pensais pas que tu le ferais, j'y suis allée pour te taquiner. "
+        got "Je ne suis quand même pas déçue..."
+
+        "Marie-Anne se lève et attrape mon bras pour me relever, mais m'embrasse puis me repousse sur les fauteuils."
+
+        got "Je vais aller me reposer. T'as intérêt à être là ce soir !"
+
+        #fondu noir vers festival
+        "Le festival se déroule agréablement..."
+        "Quelques minutes avant que Marie-Anne ne passe sur scène, je me dirige en backstage pour la voir."
+        "Je la trouve et lui fais un signe de la main qu’elle me rend."
+        "Sa musique sonne incroyablement bien ce soir, je ne peux que en profiter."
+
+
         jump goodEnding_done
 
     label goodEnding_2:
@@ -1624,22 +1690,39 @@ label start:
 
 
     label goodEnding_4:
-        "festival polyamoureux hehe"
+        "J’ai appelé les autres groupes et leur ai expliqué que Patrick ne répondait pas et que je m’inquiétais pour lui. "
+        "Jeanne et Marie-Anne ont accepté de m’aider à le chercher."
+        "Après s’être séparés et avoir cherché dans les coins de la ville où je savais qu’il avait l’habitude d’aller, nous nous sommes retrouvés devant chez lui."
+        #toc toc
+        "Faites qu’il ouvre."
+        # il ouvre la porte
+        "Dieu soit loué il va bien, même s’il n’a pas l’air dans son assiette."
+
+        "Moi" "Dieu merci tu vas bien, je m’inquiétais pour toi on t’a cherché partout."
+        punk "Ouais... Désolé..."
+        got "Ça va pas de disparaître comme ça ?"
+        punk "J’ai dit, désolé. "
+        punk "Et pis qu’est-ce que vous faites là ?"
+        hippie "On est venu prêter main forte à [nom]."
+        hippie "Il se faisait un sang d’encre pour toi et par extension nous aussi."
+        "Moi" "Qu’est-ce qu’il t’arrive ?"
+        punk "Entrez. "
+
+
+
+
         jump goodEnding_done
 
     label goodEnding_5:
         "festival avec tous les groupes trop bien !!!"
         jump goodEnding_done
     label goodEnding_done:
+        jump end
 
 
 
     label neutralEnding_1:
-        got "Qui t'as dit que j’aimais \"The cure\" ?"
-        "Moi" "Heu, personne... "
-        "Moi" "Mais vu ton style de musique je me suis dit que c’était ce que tu aimais."
-        "Moi" "Avec le festival il passait dans le coin et j’ai déjà travaillé avec lui."
-        "Moi" "J’ai envie de te proposer de fare une collab avec lui pendant le festival !"
+
         got "Dommage pour toi alors, je déteste ce groupe. "
         got "J’adore le style de musique ca s’arrête là, il peut repartir."
         "Moi" "Désolé j’aurais dû te prévenir avant tout ca."
@@ -1664,6 +1747,12 @@ label start:
 
         "Sans attendre une réponse je pars du studio laissant Marie-Anne derrière moi."
 
+        # fondu noir annoncant un changement de jour ?
+
+        "Le festival se déroule devant moi, me laissant seul devant les différentes scènes."
+        "Au loin j’entend Marie-Anne commencer à jouer avec son groupe."
+        "J’aime sa musique mais je ne me sens pas d’aller la voir, je préfère l’écouter d’ici..."
+        "Une fois son passage fini je retourne sur mes pas et rentre chez moi."
 
 
         jump neutralEnding_done
@@ -1672,7 +1761,10 @@ label start:
         hippie "festival trop bieeeennn"
         jump neutralEnding_done
     label neutralEnding_done:
+        jump end
 
+label end:
+    "MERCI D'AVOIR JOUE A \"DE L'AMOUR ENTRE LES NOTES\" !"
 
 
 
