@@ -28,14 +28,14 @@
 
 
 # Declarartions des personnages principaux / Love interests
-define got = Character('Marie-Anne', color="#ffc8ff")
-define punk = Character('Patrick', color="#ffc8a8")
-define hippie = Character('Jeanne', color="#ffffc8")
+define got = Character('Marie-Anne', color="#c8ffa8")
+define punk = Character('Patrick', color="#ffa8a8")
+define hippie = Character('Jeanne', color="#ffffa8")
 
 # Declarations des personnages secondaires
-define march = Character('Marchand', color="c8c8ff")
-define skh = Character('Skinhead', color="ff3030")
-define voisine = Character('Vieille Voisine', color="555555")
+define march = Character('Marchand', color="a8a8ff")
+define skh = Character('Skinhead', color="ff8080")
+define voisine = Character('Vieille Voisine', color="cc8888")
 
 
 
@@ -109,7 +109,22 @@ label start:
 
 
     label suite1:
-        "Eh bien, j’aurais aimé avoir une première journée moins agitée..."
+        "Bon, maintenant qu’elles sont parties, je vais pouvoir m’y mettre. "
+        "Qui est-ce que j’enregistre aujourd’hui déjà ?"
+        "Ah oui les \"Perruquiers noirs\""
+        "C’est à ce moment que l’homme qui semblait s’amuser de la dispute de tout à l'heure ouvre violemment la porte."
+        "Il rentre dans la petite pièce puis me salue d’un mouvement de tête."
+        "Bonjour, enchanté de vous rencontrer, je suis le nouvel ingé-son, [nom]. J’..."
+        "Punk" "Ouais ouais, super super. "
+        punk "Moi c'est Patrick."
+        punk "Contente-toi d'enregistrer et silence. Et t’as pas intérêt à foirer."
+
+        "Oups, je crois qu'il vaudrait mieux éviter de trop lui parler..."
+        #fondu noir
+        "La séance se passe, puis arrive la fin de la journée."
+        "Patrick sort du studio et me laisse ainsi seul."
+
+        "J’aurais aimé avoir une première journée moins agitée..."
         "Les deux filles étaient intéressantes cependant, chacune à leur manière."
         "Vu que je ne suis pas encore fatigué, autant visiter un peu la ville, pour me familiariser avec."
 
@@ -121,7 +136,7 @@ label start:
             "Partir faire des courses":
                 jump choix2_hippie
 
-            "Allez boire un verre au bar":
+            "Aller boire un verre au bar":
                 $nbRejets_hippie += 1
                 jump choix2_punk
 
@@ -130,9 +145,11 @@ label start:
 
     label suite2:
 
+        # rue la nuit
         "Il commence à se faire tard, la nuit est déjà tombée. "
         "Je travaille également demain, avec l'autre groupe que je n’ai pas encore rencontré."
         "Je vais essayer de ne pas faire de folies ce soir et avoir l’air frais pour donner une bonne première impression."
+        # image devanture immeuble
         "En arrivant devant mon immeuble, je remarque quelques personnes en train de fumer devant l’entrée, discutant bruyamment sans faire attention aux autres personnes alentours."
         "D’ailleurs, ils semblent ignorer volontairement les personnes essayant d’entrer, présentement une vieille personne avec son caddie à courses, qui essaye de les interpeller sans succès."
         "Les trois personnes, chauves, vont jusqu’à pousser la vieille femme lorsqu’elle tente de passer à coté d’eux, la faisant chuter lourdement au sol. "
@@ -156,6 +173,7 @@ label start:
         "Moi" "Pas de soucis madame, je sais me défendre. Je vous souhaite une bonne soirée cependant, je dois me lever tôt demain."
         voisine "Il n’y a pas de soucis. Passez prendre une tasse de thé un de ces quatre. Bonne soirée."
 
+        # image interieur appartement
         "Je rentre dans mon appartement, laissant la vieille femme rentrer chez elle."
         "Je ne m’attendais pas à passer une soirée si agitée. Il faudra que je fasse attention dans le voisinage désormais. "
         "Le coin n’est clairement pas aussi tranquille que le prétendais le promoteur immobilier."
@@ -164,12 +182,14 @@ label start:
 
         #METTRE FONDU NOIR
 
-        # Journée 2 enft
+        # ------------------------- JOURNEE 2 (PAS JOUABLE) -------------------------------------
+        $jour += 1
         "Allez, c’est parti pour une nouvelle journée de travail. "
         "Je me demande pourquoi le groupe d’aujourd’hui ne voulait pas faire la présentation en même temps que les autres."
         #scene studio
         "Enfin, ils ne devraient pas tarder."
 
+        #afficher skinhead
         skh "Oy, c’est toi le nouveau ?"
 
         "Oh bon sang."
@@ -194,21 +214,24 @@ label start:
 
         "Je n’ai même pas envie d’imaginer ce qu’il laisse sous entendre. "
         "La journée à été suffisamment épuisante comme ça, juste par leur présence malsaine dans le studio."
+        # image interieur appart
         "Je rentre chez moi sans incidents. "
         "Demain, il faudra que je choisisse quel groupe appeler pour une session d’enregistrement. "
+
+        #fondu noir
 
         jump suite2_done
     label suite2_done:
 
-
-
     # --------------------------------------------------------------------------
-    # ----- JOURNEE 2 -----3
+    # ----- JOURNEE 3 -----
     $jour += 1
 
     "Le bruit de mon réveil insupportable me tire de mon sommeil."
     "Après la journée d'hier, j'ai une petite appréhension de comment celle d'aujourd'hui va tourner."
     "Un café et une tranche de pain puis direction le studio."
+    #afficher image studio
+
     # Aller chez le marchand ou non ?
     "Est-ce que je passerais pas à la supérette du coin avant pour voir ce qu'ils proposent aujourd'hui ?"
     menu:
@@ -216,6 +239,7 @@ label start:
             jump magasin
         "Je suis déjà en retard...":
             "Une autre fois peut-être..."
+
 
     label suite02:
         "En arrivant je découvre cette fois le studio dans un silence assez effrayant. "
@@ -226,14 +250,14 @@ label start:
 
     # Decision session studio de la journée
     menu:
-        "Je vais appeler le groupe Effervecence.":
+        "Je vais appeler le groupe \"Effervecence\".":
             $nbRejets_hippie += 1
             jump choix3_got
 
-        "Le groupe Quatuor m'avait bien plus hier.":
+        "Le groupe \"Quatuor\" m'avait bien plus hier.":
             jump choix3_hippie
 
-        "J'ai envie de voir ce que peut donner le groupe de Perruquiers Noirs aujourd'hui.":
+        "J'ai envie de voir ce que peut donner le groupe de \"Perruquiers noirs\" aujourd'hui.":
             $nbRejets_hippie += 1
             jump choix3_punk
 
@@ -245,72 +269,77 @@ label start:
     # ----- JOURNEE 3 -----
     $jour += 1
 
+
+    "Dans le noir, le studio a une allure terifiante."
+    "Les ombres des instruments peuvent ressembler à des créatures tapies dans la pénombre."
+    "Mais il me suffit d’un seul bouton pour les faire disparaître."
+    "J'allume la lumière puis un reflet sur le côté attire mon œil vers le téléphone du studio."
+    "Est-ce que je n'irai pas passer à coup d'oeil au magasin avant d'appeler un groupe ?"
     # Aller chez le marchand ou non ?
     menu:
-        "oui":
+        "Aller à l'Epicerie du Soleil":
             jump marchand_oui
-        "non":
-            jump marchand_non
+        "Rester au studio d'enregistrement":
+            "Je vais me concentrer sur les groupes..."
 
     label suite03:
-        "jour3"
+        "Je suis content de mes achats."
         jump suite03_done
     label suite03_done:
 
     # Decision session studio de la journée
     menu:
-        "Marie-Anne":
+        "\"Effervecence\" me fait de l'oeil.":
             $amitie_got += 1
             $nbRejets_hippie += 1
+
             jump choix4_got
 
 
 
         "Je vais appeler \"Quatuor\" aujourd’hui.":
             $amitie_hippie += 1
-            "oui"
+
             if (flirt_hippie):
                 "Dans un but purement professionnel, bien sûr."
-                "La session se passe extrêmement bien, le groupe à bien progressé en quelques semaines."
-                "Après la session, Jeanne vient me voir."
+            "La session se passe extrêmement bien, le groupe à bien progressé en quelques semaines."
+            "Après la session, Jeanne vient me voir."
 
-                hippie "Hey beau gosse, comment tu vas ? "
-                hippie "Merci pour la session d'enregistrement, on a vraiment progressé aujourd'hui. "
-                "Moi" "C'est vrai, vous étiez incroyables. "
-                "Moi" "Vous êtes clairement devenus les favoris pour le festival."
-                hippie "Hihi, disons qu'en plus de vouloir plaire au public, il y a une personne de plus à qui j'aimerais bien plaire."
+            hippie "Hey beau gosse, comment tu vas ? "
+            hippie "Merci pour la session d'enregistrement, on a vraiment progressé aujourd'hui. "
+            "Moi" "C'est vrai, vous étiez incroyables. "
+            "Moi" "Vous êtes clairement devenus les favoris pour le festival."
+            hippie "Hihi, disons qu'en plus de vouloir plaire au public, il y a une personne de plus à qui j'aimerais bien plaire."
 
-                "Je sens le fard me monter aux joues. "
-                "Je ne suis pas d'un naturel prude, mais cette fille fait ressortir de moi des aspects dont j'ignorais l'existence. "
-                "Et ce n'est pas pour me déplaire."
+            "Je sens le fard me monter aux joues. "
+            "Je ne suis pas d'un naturel prude, mais cette fille fait ressortir de moi des aspects dont j'ignorais l'existence. "
+            "Et ce n'est pas pour me déplaire."
 
-                hippie "Sinon, cet aprem il y a une manif pour le bien être animal, mais si tu es libre ce soir, ça te dirait de me rejoindre dans le parc du Thabor ?"
-                "Moi" "C'est un rencard que tu me proposes ?"
-                hippie "Hihi, peut-être bien."
+            hippie "Sinon, cet aprem il y a une manif pour le bien être animal, mais si tu es libre ce soir, ça te dirait de me rejoindre dans le parc du Thabor ?"
+            "Moi" "C'est un rencard que tu me proposes ?"
+            hippie "Hihi, peut-être bien."
 
-                menu:
-                    "Je serais là !":
-                        jump date2_hippie
+            menu:
+                "Je serais là !":
+                    jump date2_hippie
 
 
-                    "Je suis désolé, je ne pense pas que ça soit une bonne idée.":
-                        "Moi" "Je t'apprécie énormément, mais je pense que nos relations doivent rester professionnelles."
-                        hippie "Oh… Je… Je croyais que... "
-                        hippie "Je suis désolée."
+                "Je suis désolé, je ne pense pas que ça soit une bonne idée.":
+                    "Moi" "Je t'apprécie énormément, mais je pense que nos relations doivent rester professionnelles."
+                    hippie "Oh… Je… Je croyais que... "
+                    hippie "Je suis désolée."
 
-                        "Jeanne part en courant avant que je puisse l'arrêter."
-                        if (nbRejets_hippie >= 4):
-                            hippie "jai fait une overdose bg"
-                            "----- BAD ENDING 2 -----"
-                            jump badEnding_2
-                            #code la fin
-            else:
-                jump choix3_hippie
+                    "Jeanne part en courant avant que je puisse l'arrêter."
+                    if (nbRejets_hippie >= 4):
+                        hippie "jai fait une overdose bg"
+                        #changer dialogues ici
+                        jump badEnding_2
 
-        "Patrick":
+
+        "Je préfererai enregistrer avec les \"Perruquiers noirs\".":
             $nbRejets_hippie += 1
             $amitie_punk += 1
-            "session enregitrement"
+
             if (amitie_punk >= 4):
                 jump choix4_punk
             else:
@@ -329,13 +358,14 @@ label start:
     "Est-ce que je vais chez les marchand pour voir s'il a des nouveautés ?"
     # Aller chez le marchand ou non ?
     menu:
-        "oui":
+        "Pourquoi pas ?":
             jump marchand_oui
-        "non":
-            jump marchand_non
+        "Je crois que j'en ai assez vu.":
+            "Je vais me concentrer sur mon travail."
+            "Le festival arrive à grands pas."
 
     label suite04:
-        "jour 4"
+        "Courses productives"
         jump suite04_done
     label suite04_done:
 
@@ -500,15 +530,13 @@ label start:
         hippie "C'est un plaisir de vous rencontrer"
         got "Ouais, désolée. Je m'appelle Marie-Anne et suis la guitariste de mon groupe \"Effervecence\"."
 
-        "L'homme qui observait la dispute se leve et se rapproche du petit attroupement."
-
-        punk "Oy, moi c'est Patrick. Je gère les \"Perruquiers noirs\", les autres membres ne devraient pas tarder à arriver."
+        "L'homme qui observait la dispute se leve sort par la porte qui mène à l'arrière du studio."
 
         "Nous continuons à discuter jusqu'à ce que, en effet, les autres membres de chaque groupe arrivent."
         "J'ai également appris que le quatrième groupe qui devait venir ne viendrait en fait que demain, seul."
         "Un peu déçu de ne pas les voir, je me concentre tout de même sur les trois qui se trouvent en face de moi."
-        "Ils passent les uns après les autres me montrer quelques titres qu'ils produisent chaque semaine dans des bars."
-        "Chaque groupe est unique et a sa patte qui les diffèrent des autres."
+        "\"Quatuor\" et \Effervecence\" passent l'un après l'autre pour me montrer quelques titres qu'ils produisent chaque semaine dans des bars."
+        "Les deux groupes sont uniques et ont leur patte qui les diffèrent de l'autres."
 
 
         jump choix1_done
@@ -535,12 +563,14 @@ label start:
     # Choix 2 : Premiere balade du soir
     label choix2_got:
         $amitie_got += 1
+        $choix2_balade = True
 
         # ECRIRE ICI
         jump choix2_done
 
     label choix2_hippie:
         $amitie_hippie += 1
+        $choix2_magasin = True
 
         "Après avoir un petit peu tourné dans les rues autour de chez moi, j’ai trouvé une supérette, mais il semble y avoir un attroupement devant."
         "Mais… C’est pas la fille de tout à l’heure avec une pancarte au milieu de la foule ?"
@@ -557,7 +587,7 @@ label start:
 
         "Moi" "Euuuh..."
 
-        if $interrompre:
+        if interrompre:
             hippie "Ah, je suis contente de voir que tu t’intéresse au bien être animal ! "
             hippie "Je ne savais pas trop quoi penser de toi au studio..."
             hippie "Vu que tu ne m’avais pas laissé finir d’expliquer à cette fille que porter des crânes d’animaux n’était pas très respectueux pour ces pauvres petits écureuils."
@@ -601,6 +631,7 @@ label start:
 
     label choix2_punk:
         $amitie_punk += 1
+        $choix2_bar = True
 
         "J’irais bien faire un tour au bar ce soir, ça pourrait m’aider à rencontrer du monde et à me familiariser avec la ville."
         "J'entre dans un bar et m‘approche du comptoir pour commander une bière"
@@ -649,6 +680,7 @@ label start:
     # Choix 3 : Choix session studio
     label choix3_got:
         $amitie_got += 1
+        $choix3_cimetiere = True
 
         "Allez, je compose le numéro du groupe de gothique."
         "Le téléphone sonne, chaque bip fais monter en moi une pression étrange."
@@ -685,6 +717,8 @@ label start:
 
 
     label choix3_hippie:
+        $choix3_diabolo = True
+        $amitie_hippie += 1
 
 
         "Je vais appeler \"Quatuor\" aujourd’hui."
@@ -734,6 +768,7 @@ label start:
 
     label choix3_punk:
         $amitie_punk += 1
+        $choix3_bagarre = True
 
         "J'appelle un des membres du groupe et leur demande de venir."
         "blablabla"
@@ -823,7 +858,7 @@ label start:
 
             menu:
                 "Encore une bière s'il te plait":
-                    $menu_flag2 = True
+                    $boitBiere = True
                     $nbBieres += 1
 
                 "Je vais boir de l'eau pour cette fois":
@@ -833,7 +868,7 @@ label start:
             "Moi" "Merci."
 
             "Je regarde Patrick enfiler son verre cul-sec"
-            if $menu_flag2:
+            if $boitBiere:
                 punk "Alors ? Je t’attends là en fait."
 
                 "Je crois qu'il veut que je cul-sec aussi..."
@@ -878,6 +913,7 @@ label start:
         #MINI JEU BAGARRE
 
         #si defaite
+        $victoire_bagarre = False
         "Après nous avoir mis tous les deux à terre et nous avoir pris nos portefeuille les skinheads sont partis."
         punk "Putain, on s’est pris une grosse raclée."
         punk "Je pensais que tu aurait été plus utile que ça."
@@ -888,6 +924,7 @@ label start:
         $amitie_punk -= 1
 
         # si victoire
+        $victoire_bagarre = True
         "Après quelques coups reçus, les skinheads ont pris la fuite."
         punk "Bien joué ! Tu lui as bien montré au tien."
         "Je pourrais en dire autant de toi."
@@ -910,14 +947,17 @@ label start:
     # Choix 4 : Choix session studio
     label choix4_got:
         if (amitie_got >= 5):
-            got "Allo ?"
+            got "Allô ?"
             "Moi" "Bonjour c’est [nom], je t’appelle pour savoir si tu avais envie de refaire une session aujourd’hui ?"
-            # si choix got la veille
-            got "Oh oui bien sûr ! ça été hier après que je sois parti ?"
-            "Moi" "Nan tu m'as quand même laissé comme un imbécile au milieu d’un cimetière !"
-            got "Mais je suis sûre que tu t'es bien amusé nan ?"
-            "Moi" "Je peux pas dire le contraire mais je ne te ferai pas ce plaisir !"
-            got "Ah ah ! Parfait alors on arrive, à tout à l’heure !"
+            if $choix3_cimetiere:
+                # si choix got la veille
+                got "Oh oui bien sûr ! ça été hier après que je sois parti ?"
+                "Moi" "Nan tu m'as quand même laissé comme un imbécile au milieu d’un cimetière !"
+                got "Mais je suis sûre que tu t'es bien amusé nan ?"
+                "Moi" "Je peux pas dire le contraire mais je ne te ferai pas ce plaisir !"
+                got "Ah ah ! Parfait alors on arrive, à tout à l’heure !"
+            else:
+                got "OUI ! On arrive !"
 
             "Sans que je puisse répondre elle raccroche."
             "Je n’ai plus qu' à attendre qu’ils arrivent."
